@@ -78,7 +78,7 @@ export default function About() {
               <div className="bg-background border p-6 rounded-xl shadow-sm">
                 <Music className="w-8 h-8 text-accent mb-4" />
                 <h4 className="font-bold mb-2">Musician</h4>
-                <p className="text-sm text-muted-foreground">Creating original music as a form of pure expression.</p>
+                <p className="text-sm text-muted-foreground">Creating original music. I began with a love for poetry and rap, picked up piano as a kid but became obsessed with guitar and banjo in early teenage years. I've been training my voice over the past 2 years and enjoy small performances of original songs. Influenced most by Gregory Alan Isakov, I'm working toward releasing my first music on streaming platforms in 2026.</p>
               </div>
               <div className="bg-background border p-6 rounded-xl shadow-sm">
                 <HomeIcon className="w-8 h-8 text-primary mb-4" />
