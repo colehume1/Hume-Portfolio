@@ -83,7 +83,7 @@ export default function About() {
               <div className="bg-background border p-6 rounded-xl shadow-sm">
                 <HomeIcon className="w-8 h-8 text-primary mb-4" />
                 <h4 className="font-bold mb-2">Real Estate Agent</h4>
-                <p className="text-sm text-muted-foreground">Licensed in California. Helping others build wealth through property.</p>
+                <p className="text-sm text-muted-foreground">Licensed in California primarily for personal investing. While I'm not currently representing clients, I'm well connected to excellent brokers in the San Diego area and happy to make thoughtful referrals. I'm also always glad to talk shop on real estate investing—ADUs, rental cash flow, house hacking, and related decisions.</p>
               </div>
             </div>
           </motion.section>
