@@ -30,7 +30,7 @@ export default function Content() {
           <div className="grid sm:grid-cols-3 gap-6">
             {/* YouTube Card */}
             <motion.a
-              href="https://www.youtube.com/@YoungSmartBattlingBroke"
+              href="https://www.youtube.com/@COLEHUME/videos"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -4 }}
@@ -99,8 +99,7 @@ export default function Content() {
             <div className="space-y-4">
               {[
                 { name: "Apple Podcasts", url: "https://podcasts.apple.com/ca/podcast/young-smart-battling-broke/id1782582039" },
-                { name: "Spotify", url: "https://open.spotify.com/show/1A1qgRoVWPYYlm0qJB5NHI" },
-                { name: "Amazon Music", url: "https://music.amazon.com/podcasts/young-smart-battling-broke" }
+                { name: "Spotify", url: "https://open.spotify.com/show/1A1qgRoVWPYYlm0qJB5NHI" }
               ].map((platform) => (
                 <a 
                   key={platform.name}

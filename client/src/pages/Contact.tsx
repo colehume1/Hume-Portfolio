@@ -43,7 +43,7 @@ export default function Contact() {
         >
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">Let's Connect</h1>
           <p className="text-xl text-muted-foreground mb-12 max-w-lg">
-            Whether you want to discuss strategy, podcast collaboration, or just say hello—I'd love to hear from you.
+            Whether you'd like to discuss strategy, content collaboration, or just say hello--I'd love to chat.
           </p>
 
           <div className="space-y-8">
