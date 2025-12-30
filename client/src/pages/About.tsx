@@ -48,7 +48,7 @@ export default function About() {
             </div>
           </motion.section>
 
-          {/* The Intersection */}
+          {/* A Loving Impact */}
           <motion.section
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -56,14 +56,13 @@ export default function About() {
             className="bg-secondary/40 p-8 rounded-2xl border border-secondary"
           >
             <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <span className="text-accent text-2xl">✦</span> Finding the Intersection
+              <span className="text-accent text-2xl">✦</span> A Loving Impact
             </h3>
             <p className="text-muted-foreground mb-4">
-              I believe the most compelling work happens at the intersection of multiple disciplines. 
-              Strategy + Technology. Business + Human values. Analytics + Creativity.
+              I'll be the first to admit this is hard to operationalize. You can't spreadsheet "love" and it doesn't map cleanly to outcomes or titles. But across every health scare, career decision, and personal reset, my sense of meaning keeps resolving to the same place.
             </p>
-            <p className="text-muted-foreground italic">
-              This is where innovation happens—where we can build solutions that are both rigorous and meaningful.
+            <p className="text-muted-foreground">
+              If I can help a few people say "I love" a little more often, I'll consider my life well spent. That might mean loving the spaces we inhabit, the communities we build, or the technologies and systems we choose to bring into the world.
             </p>
           </motion.section>
 
