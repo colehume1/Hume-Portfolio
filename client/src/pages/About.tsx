@@ -31,16 +31,19 @@ export default function About() {
             </div>
             <div className="prose prose-lg text-muted-foreground">
               <p>
-                Currently, I serve as an <strong>Associate at Boston Consulting Group (BCG)</strong> in San Diego. 
-                My work involves tackling high-stakes strategic challenges, helping organizations navigate digital transformation, and building evidence-based solutions to complex problems.
+                During college, I lost my ability to read for several months due to a rare form of epilepsy, with an initial prognosis that it might be permanent. That period clarified something important for me: meaning is not derived from mere skill or labor, but from the ability to have a real, loving impact. When my reading ability returned after finding a medication with unusually high efficacy for me, it became equally clear that thoughtful communication and careful thinking around complex problems are the ways I can do the most good.
               </p>
               <p>
-                What fascinates me most is how <strong>AI and emerging technologies</strong> are reshaping business strategy and creating new possibilities for human impact. 
-                I'm equally invested in understanding how we harness these tools responsibly and thoughtfully.
+                Alongside my work as a consultant at Boston Consulting Group (BCG), I spend a lot of time thinking about how technology shapes human decision-making and how responsibility fits as systems become more powerful. In 2022, as concerns around AI safety and misuse grew more urgent, I helped re-found the AI Robotics Ethics Society (AIRES) at UCLA. The organization sat at the intersection of philosophy and computer science and reflected a long-standing interest in building ambitious systems without being careless about their consequences.
               </p>
               <p>
-                I graduated from <strong>UCLA</strong>, where I was deeply involved in the Bruin Consulting community. 
-                That experience taught me frameworks, but more importantly, it instilled a commitment to rigorous thinking and mentorship.
+                My thinking is shaped by work that crosses disciplines rather than staying neatly inside them. Books like Gödel, Escher, Bach influenced how I see computation not just as a technical tool, but as a way of understanding structure, meaning, and limits. That perspective continues to guide how I approach problems that sit between logic, creativity, and human judgment.
+              </p>
+              <p>
+                In 2024, I co-founded a home health and wellness inspection company, working closely with customers and service design. We ultimately paused the venture after running into technical constraints that made it difficult to deliver the level of rigor we felt was necessary. While the company did not continue, the experience reinforced my interest in building things carefully and my appetite for early-stage, ambiguous work has not gone away.
+              </p>
+              <p>
+                Across these experiences, I am most drawn to work that rewards clarity of thought, intellectual honesty, and long-term responsibility, especially where technology, business, and human values intersect.
               </p>
             </div>
           </motion.section>
