@@ -29,8 +29,7 @@ export default function Home() {
               Cole Hume
             </motion.h1>
             <motion.p variants={fadeIn} className="text-xl md:text-2xl text-muted-foreground font-light mb-8 max-w-lg">
-              Associate at BCG. Content Creator. <br className="hidden md:block"/>
-              Building community with loving impact.
+              Building and sharing insights at the intersection of business, AI, and meaning.
             </motion.p>
             
             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
@@ -53,8 +52,8 @@ export default function Home() {
               {/* Using a placeholder for Cole - normally would be his photo */}
               {/* Professional headshot placeholder */}
               <img 
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" 
-                alt="Professional portrait"
+                src="/cole-profile.png" 
+                alt="Cole Hume"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -62,7 +61,7 @@ export default function Home() {
             
             {/* Floating Card */}
             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl max-w-xs hidden md:block">
-              <p className="font-display italic text-lg text-primary">"Connecting young minds to build wealth with creativity and passion."</p>
+              <p className="font-display italic text-lg text-primary">"Exploring how business, technology, and meaning intersect."</p>
             </div>
           </motion.div>
         </div>
