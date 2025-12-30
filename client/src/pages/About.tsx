@@ -1,5 +1,8 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Briefcase, Heart, Music, Home as HomeIcon } from "lucide-react";
+import dogPhoto from "@assets/IMG_5385_1767124821581.PNG";
+import runningPhoto from "@assets/IMG_6420_1767124821582.JPG";
+import guitarPhoto from "@assets/Yuito_an_Cole_1767124821582.png";
 
 export default function About() {
   return (
@@ -87,6 +90,51 @@ export default function About() {
                 <h4 className="font-bold mb-2">Real Estate Agent</h4>
                 <p className="text-sm text-muted-foreground">Licensed in California primarily for personal investing. While I'm not currently representing clients, I'm well connected to excellent brokers in the San Diego area and happy to make thoughtful referrals. I'm also always glad to talk shop on real estate investing—ADUs, rental cash flow, house hacking, and related decisions.</p>
               </div>
+            </div>
+          </motion.section>
+
+          {/* Photo Collage */}
+          <motion.section
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="mt-8"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <motion.div
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden rounded-lg shadow-sm"
+              >
+                <img
+                  src={dogPhoto}
+                  alt="Cole with dog"
+                  className="w-full h-64 object-cover"
+                />
+              </motion.div>
+              <motion.div
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden rounded-lg shadow-sm"
+              >
+                <img
+                  src={runningPhoto}
+                  alt="Cole running"
+                  className="w-full h-64 object-cover"
+                />
+              </motion.div>
+              <motion.div
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden rounded-lg shadow-sm"
+              >
+                <img
+                  src={guitarPhoto}
+                  alt="Cole playing guitar"
+                  className="w-full h-64 object-cover"
+                />
+              </motion.div>
             </div>
           </motion.section>
         </div>
