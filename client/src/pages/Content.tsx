@@ -1,23 +1,84 @@
 import { motion } from "framer-motion";
-import { Mic, Newspaper, ExternalLink, ArrowRight } from "lucide-react";
+import { Mic, Newspaper, ExternalLink, ArrowRight, Youtube } from "lucide-react";
 
 export default function Content() {
   return (
     <div className="pt-32 pb-20 min-h-screen">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <span className="text-accent font-medium tracking-wide uppercase text-sm mb-4 block">The Media Platform</span>
-          <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">Young, Smart, & Battling Broke</h1>
+          <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">Navigating the Chaotic but Wonderful 20s</h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            A community for young people navigating financial uncertainty while building meaningful careers.
-            We explore entrepreneurship, mindfulness, and unconventional paths to wealth.
+            Young, Smart, & Battling Broke is a media platform for people figuring out work, money, and meaning in real time. We explore careers, entrepreneurship, finances, and personal growth with honesty, curiosity, and long-term thinking.
           </p>
         </motion.div>
 
+        {/* Content Hub Section */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mb-20"
+        >
+          <p className="text-center text-muted-foreground mb-12">
+            Find our conversations and ideas across writing, video, and audio.
+          </p>
+          
+          <div className="grid sm:grid-cols-3 gap-6">
+            {/* YouTube Card */}
+            <motion.a
+              href="https://www.youtube.com/@YoungSmartBattlingBroke"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -4 }}
+              className="group bg-background border rounded-xl p-8 text-center hover:border-primary/50 transition-colors"
+            >
+              <Youtube className="w-10 h-10 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="font-bold text-lg mb-2">Video Essays & Conversations</h3>
+              <p className="text-sm text-muted-foreground">Long-form explorations on YouTube</p>
+              <div className="flex items-center justify-center gap-2 mt-4 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                Watch <ExternalLink className="w-3 h-3" />
+              </div>
+            </motion.a>
+
+            {/* Writing Card */}
+            <motion.a
+              href="https://colehume1.substack.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -4 }}
+              className="group bg-background border rounded-xl p-8 text-center hover:border-primary/50 transition-colors"
+            >
+              <Newspaper className="w-10 h-10 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="font-bold text-lg mb-2">Writing & Newsletter</h3>
+              <p className="text-sm text-muted-foreground">Weekly insights on Substack</p>
+              <div className="flex items-center justify-center gap-2 mt-4 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                Read <ExternalLink className="w-3 h-3" />
+              </div>
+            </motion.a>
+
+            {/* Podcast Card */}
+            <motion.a
+              href="https://podcasts.apple.com/ca/podcast/young-smart-battling-broke/id1782582039"
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -4 }}
+              className="group bg-background border rounded-xl p-8 text-center hover:border-primary/50 transition-colors"
+            >
+              <Mic className="w-10 h-10 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="font-bold text-lg mb-2">Podcast</h3>
+              <p className="text-sm text-muted-foreground">Deep-dive conversations</p>
+              <div className="flex items-center justify-center gap-2 mt-4 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                Listen <ExternalLink className="w-3 h-3" />
+              </div>
+            </motion.a>
+          </div>
+        </motion.section>
+
+        {/* Detailed Platform Sections */}
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Podcast Section */}
           <motion.div 
