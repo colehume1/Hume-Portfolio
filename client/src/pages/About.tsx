@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Briefcase, Heart, Music, Home as HomeIcon } from "lucide-react";
+import { useState } from "react";
 import dogPhoto from "@assets/IMG_5385_1767124821581.PNG";
 import runningPhoto from "@assets/IMG_6420_1767124821582.JPG";
 import guitarPhoto from "@assets/Yuito_an_Cole_1767124821582.png";
 
 export default function About() {
+  const [visibleCaption, setVisibleCaption] = useState<number | null>(null);
   return (
     <div className="pt-32 pb-20 min-h-screen">
       <div className="max-w-4xl mx-auto px-6">
@@ -102,38 +104,103 @@ export default function About() {
             className="mt-8"
           >
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {/* Image 1: Dog */}
               <motion.div
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
-                className="overflow-hidden rounded-lg shadow-sm"
+                className="group relative overflow-hidden rounded-lg shadow-sm cursor-pointer"
+                onClick={() => setVisibleCaption(visibleCaption === 0 ? null : 0)}
               >
                 <img
                   src={dogPhoto}
                   alt="Cole with dog"
                   className="w-full h-64 object-cover"
                 />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  className="absolute inset-0 hidden sm:flex sm:group-hover:flex items-end justify-start rounded-lg"
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  <p className="relative text-white text-sm leading-tight p-4 font-medium">
+                    Raised in San Diego. I love surfing Beacons Beach and hanging with my family pup, Koda.
+                  </p>
+                </motion.div>
+                {visibleCaption === 0 && (
+                  <div className="absolute inset-0 sm:hidden flex items-end justify-start rounded-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                    <p className="relative text-white text-sm leading-tight p-4 font-medium">
+                      Raised in San Diego. I love surfing Beacons Beach and hanging with my family pup, Koda.
+                    </p>
+                  </div>
+                )}
               </motion.div>
+
+              {/* Image 2: Running */}
               <motion.div
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
-                className="overflow-hidden rounded-lg shadow-sm"
+                className="group relative overflow-hidden rounded-lg shadow-sm cursor-pointer"
+                onClick={() => setVisibleCaption(visibleCaption === 1 ? null : 1)}
               >
                 <img
                   src={runningPhoto}
                   alt="Cole running"
-                  className="w-full h-64 object-cover"
+                  className="w-full h-64 object-cover object-top"
                 />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  className="absolute inset-0 hidden sm:flex sm:group-hover:flex items-end justify-start rounded-lg"
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  <p className="relative text-white text-sm leading-tight p-4 font-medium">
+                    Health nerd. Ran my first marathon in 2025.
+                  </p>
+                </motion.div>
+                {visibleCaption === 1 && (
+                  <div className="absolute inset-0 sm:hidden flex items-end justify-start rounded-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                    <p className="relative text-white text-sm leading-tight p-4 font-medium">
+                      Health nerd. Ran my first marathon in 2025.
+                    </p>
+                  </div>
+                )}
               </motion.div>
+
+              {/* Image 3: Guitar */}
               <motion.div
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
-                className="overflow-hidden rounded-lg shadow-sm"
+                className="group relative overflow-hidden rounded-lg shadow-sm cursor-pointer"
+                onClick={() => setVisibleCaption(visibleCaption === 2 ? null : 2)}
               >
                 <img
                   src={guitarPhoto}
                   alt="Cole playing guitar"
                   className="w-full h-64 object-cover"
                 />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  className="absolute inset-0 hidden sm:flex sm:group-hover:flex items-end justify-start rounded-lg"
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  <p className="relative text-white text-sm leading-tight p-4 font-medium">
+                    Studied abroad in Totsuka, Japan. I have a loving community there and visit often. I can speak a bit, but I'm far from fluent.
+                  </p>
+                </motion.div>
+                {visibleCaption === 2 && (
+                  <div className="absolute inset-0 sm:hidden flex items-end justify-start rounded-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                    <p className="relative text-white text-sm leading-tight p-4 font-medium">
+                      Studied abroad in Totsuka, Japan. I have a loving community there and visit often. I can speak a bit, but I'm far from fluent.
+                    </p>
+                  </div>
+                )}
               </motion.div>
             </div>
           </motion.section>
