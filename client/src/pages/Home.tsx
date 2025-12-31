@@ -112,20 +112,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Impact Tagline Section */}
-      <section className="py-24 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-lg md:text-xl text-muted-foreground leading-relaxed"
-          >
-            I hope to have a loving impact through building businesses, sharing what I learn, and investing in community.
-          </motion.p>
-        </div>
-      </section>
     </div>
   );
 }
