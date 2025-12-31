@@ -171,11 +171,13 @@ export default function About() {
               </motion.div>
 
               {/* Image 3: Guitar */}
-              <motion.div
+              <motion.a
+                href="https://www.linkedin.com/posts/cole-hume-a737041b6_warning-this-post-will-not-align-with-what-activity-7270856848562352129-ia6R?utm_source=share&utm_medium=member_desktop&rcm=ACoAADJLVPcB3nujto_6lcswhw5kOEC--q2B0M8"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3 }}
-                className="group relative overflow-hidden rounded-lg shadow-sm cursor-pointer"
-                onClick={() => setVisibleCaption(visibleCaption === 2 ? null : 2)}
+                className="group relative overflow-hidden rounded-lg shadow-sm cursor-pointer block"
               >
                 <img
                   src={guitarPhoto}
@@ -190,18 +192,16 @@ export default function About() {
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                   <p className="relative text-white text-sm leading-tight p-4 font-medium">
-                    Studied abroad in Totsuka, Japan. I have a loving community there and visit often. I can speak a bit, but I'm far from fluent.
+                    Click this photo to watch a video of my journey meeting the Nate family.
                   </p>
                 </motion.div>
-                {visibleCaption === 2 && (
-                  <div className="absolute inset-0 sm:hidden flex items-end justify-start rounded-lg">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                    <p className="relative text-white text-sm leading-tight p-4 font-medium">
-                      Studied abroad in Totsuka, Japan. I have a loving community there and visit often. I can speak a bit, but I'm far from fluent.
-                    </p>
-                  </div>
-                )}
-              </motion.div>
+                <div className="absolute inset-0 sm:hidden flex items-end justify-start rounded-lg">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  <p className="relative text-white text-sm leading-tight p-4 font-medium">
+                    Click this photo to watch a video of my journey meeting the Nate family.
+                  </p>
+                </div>
+              </motion.a>
             </div>
           </motion.section>
         </div>
