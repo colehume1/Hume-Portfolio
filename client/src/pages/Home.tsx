@@ -28,8 +28,11 @@ export default function Home() {
             <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-display font-bold text-foreground leading-[1.1] mb-6">
               Cole Hume
             </motion.h1>
-            <motion.p variants={fadeIn} className="text-xl md:text-2xl text-muted-foreground font-light mb-8 max-w-lg">
-              Building and sharing insights at the intersection of business, AI, and meaning.
+            <motion.p variants={fadeIn} className="text-lg md:text-xl text-muted-foreground font-light mb-3 max-w-lg">
+              Here for the big curiosities and small inputs that make life wonderful
+            </motion.p>
+            <motion.p variants={fadeIn} className="text-base text-muted-foreground/80 font-light mb-8 max-w-lg leading-relaxed">
+              I believe business can do real good and be really enjoyable. Experience across AI and technology, consumer, and healthcare.
             </motion.p>
             
             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
@@ -59,10 +62,6 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
             </div>
             
-            {/* Floating Card */}
-            <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl max-w-xs hidden md:block">
-              <p className="font-display italic text-lg text-primary">"Exploring how business, technology, and meaning intersect."</p>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -70,6 +69,14 @@ export default function Home() {
       {/* Roles Section */}
       <section className="bg-secondary/30 py-24">
         <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">Navigating the Chaotic, Wonderful 20s</h2>
+          </motion.div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -85,7 +92,7 @@ export default function Home() {
               {
                 icon: <Users className="w-8 h-8 text-primary" />,
                 title: "Community & Impact",
-                desc: "Connecting ambitious professionals to foster growth and financial savviness."
+                desc: "I believe community is the most important ingredient to happiness. I find real joy in learning about people, listening carefully, and connecting thoughtful individuals whenever I can."
               }
             ].map((item, i) => (
               <motion.div 
@@ -102,6 +109,20 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Impact Tagline Section */}
+      <section className="py-24 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-lg md:text-xl text-muted-foreground leading-relaxed"
+          >
+            I hope to have a loving impact through building businesses, sharing what I learn, and investing in community.
+          </motion.p>
         </div>
       </section>
     </div>

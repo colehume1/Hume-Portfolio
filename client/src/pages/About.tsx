@@ -34,7 +34,7 @@ export default function About() {
               <Briefcase className="w-6 h-6 text-primary" />
               <h2 className="text-2xl font-display font-bold">The Professional Path</h2>
             </div>
-            <div className="prose prose-lg text-muted-foreground">
+            <div className="space-y-6 text-sm text-muted-foreground leading-[1.65]">
               <p>
                 During college, I lost my ability to read for several months due to a rare form of epilepsy, with an initial prognosis that it might be permanent. That period clarified something important for me: meaning is not derived from mere skill or labor, but from the ability to have a real, loving impact. When my reading ability returned after finding a medication with unusually high efficacy for me, it became equally clear that thoughtful communication and careful thinking around complex problems are the ways I can do the most good.
               </p>
