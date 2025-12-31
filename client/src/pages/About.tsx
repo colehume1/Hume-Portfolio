@@ -81,12 +81,12 @@ export default function About() {
               <div className="bg-background border p-6 rounded-xl shadow-sm">
                 <Music className="w-8 h-8 text-accent mb-4" />
                 <h4 className="font-bold mb-2">Musician</h4>
-                <p className="text-sm text-muted-foreground">Creating original music. I began with a love for poetry and rap, picked up piano as a kid but became obsessed with guitar and banjo in early teenage years. I've been training my voice over the past 2 years and enjoy small performances of original songs. Influenced most by Gregory Alan Isakov, I'm working toward releasing my first music on streaming platforms in 2026.</p>
+                <p className="text-sm text-muted-foreground">I play guitar and write original songs. I've trained my voice over the past couple years and perform with friends. Music is a way I process the world, influenced by artists like Gregory Alan Isakov.</p>
               </div>
               <div className="bg-background border p-6 rounded-xl shadow-sm">
                 <HomeIcon className="w-8 h-8 text-primary mb-4" />
                 <h4 className="font-bold mb-2">Real Estate Agent</h4>
-                <p className="text-sm text-muted-foreground">Licensed in California primarily for personal investing. While I'm not currently representing clients, I'm well connected to excellent brokers in the San Diego area and happy to make thoughtful referrals. I'm also always glad to talk shop on real estate investing—ADUs, rental cash flow, house hacking, and related decisions.</p>
+                <p className="text-sm text-muted-foreground">Licensed in California for personal investing. I'm not actively representing clients, but I enjoy talking about real estate and making introductions when I can help.</p>
               </div>
               <div className="bg-background border p-6 rounded-xl shadow-sm">
                 <Users className="w-8 h-8 text-accent mb-4" />
@@ -114,7 +114,7 @@ export default function About() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="mt-8"
+            className="mt-0"
           >
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Image 1: Dog */}
