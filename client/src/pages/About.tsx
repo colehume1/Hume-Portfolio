@@ -19,18 +19,6 @@ export default function About() {
         </motion.div>
 
         <div className="grid gap-12">
-          {/* Divider */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-4 py-12"
-          >
-            <div className="flex-1 h-px bg-border"></div>
-            <p className="text-sm text-muted-foreground whitespace-nowrap">Other things that make me happy</p>
-            <div className="flex-1 h-px bg-border"></div>
-          </motion.div>
-
           {/* Photo Collage */}
           <motion.section
             initial={{ opacity: 0 }}
@@ -215,116 +203,6 @@ export default function About() {
                 <h4 className="font-bold mb-2">Volunteer & Organizer</h4>
                 <p className="text-sm text-muted-foreground">My brother's diagnosis with Juvenile Dermatomyositis led my family to start the Cure JM Foundation, an experience that shaped my childhood and how I think about what matters.</p>
               </div>
-            </div>
-          </motion.section>
-
-          {/* Photo Collage */}
-          <motion.section
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mt-0"
-          >
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {/* Image 1: Dog */}
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
-                className="group relative overflow-hidden rounded-lg shadow-sm cursor-pointer"
-                onClick={() => setVisibleCaption(visibleCaption === 0 ? null : 0)}
-              >
-                <img
-                  src={dogPhoto}
-                  alt="Cole with dog"
-                  className="w-full h-64 object-cover"
-                />
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  className="absolute inset-0 hidden sm:flex sm:group-hover:flex items-end justify-start rounded-lg"
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <p className="relative text-white text-sm leading-tight p-4 font-medium">
-                    Raised in San Diego. I love surfing Beacons Beach and hanging with my family pup, Koda.
-                  </p>
-                </motion.div>
-                {visibleCaption === 0 && (
-                  <div className="absolute inset-0 sm:hidden flex items-end justify-start rounded-lg">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                    <p className="relative text-white text-sm leading-tight p-4 font-medium">
-                      Raised in San Diego. I love surfing Beacons Beach and hanging with my family pup, Koda.
-                    </p>
-                  </div>
-                )}
-              </motion.div>
-
-              {/* Image 2: Running */}
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
-                className="group relative overflow-hidden rounded-lg shadow-sm cursor-pointer"
-                onClick={() => setVisibleCaption(visibleCaption === 1 ? null : 1)}
-              >
-                <img
-                  src={runningPhoto}
-                  alt="Cole running"
-                  className="w-full h-64 object-cover object-top"
-                />
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  className="absolute inset-0 hidden sm:flex sm:group-hover:flex items-end justify-start rounded-lg"
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <p className="relative text-white text-sm leading-tight p-4 font-medium">
-                    Health nerd. Ran my first marathon in 2025.
-                  </p>
-                </motion.div>
-                {visibleCaption === 1 && (
-                  <div className="absolute inset-0 sm:hidden flex items-end justify-start rounded-lg">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                    <p className="relative text-white text-sm leading-tight p-4 font-medium">
-                      Health nerd. Ran my first marathon in 2025.
-                    </p>
-                  </div>
-                )}
-              </motion.div>
-
-              {/* Image 3: Guitar */}
-              <motion.a
-                href="https://www.linkedin.com/posts/cole-hume-a737041b6_warning-this-post-will-not-align-with-what-activity-7270856848562352129-ia6R?utm_source=share&utm_medium=member_desktop&rcm=ACoAADJLVPcB3nujto_6lcswhw5kOEC--q2B0M8"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
-                className="group relative overflow-hidden rounded-lg shadow-sm cursor-pointer block"
-              >
-                <img
-                  src={guitarPhoto}
-                  alt="Cole playing guitar"
-                  className="w-full h-64 object-cover"
-                />
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  className="absolute inset-0 hidden sm:flex sm:group-hover:flex items-end justify-start rounded-lg"
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <p className="relative text-white text-sm leading-tight p-4 font-medium">
-                    Click this photo to watch a video of my time with the incredibly special Nate family from when I studied in Japan.
-                  </p>
-                </motion.div>
-                <div className="absolute inset-0 sm:hidden flex items-end justify-start rounded-lg">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <p className="relative text-white text-sm leading-tight p-4 font-medium">
-                    Click this photo to watch a video of my time with the incredibly special Nate family from when I studied in Japan.
-                  </p>
-                </div>
-              </motion.a>
             </div>
           </motion.section>
         </div>
