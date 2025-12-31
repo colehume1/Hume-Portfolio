@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { GraduationCap, Briefcase, Heart, Music, Home as HomeIcon } from "lucide-react";
+import { GraduationCap, Briefcase, Heart, Music, Home as HomeIcon, Users } from "lucide-react";
 import { useState } from "react";
 import dogPhoto from "@assets/IMG_5385_1767124821581.PNG";
 import runningPhoto from "@assets/IMG_6420_1767124821582.JPG";
@@ -16,10 +16,6 @@ export default function About() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-8">About Cole</h1>
-          <p className="text-xl text-muted-foreground leading-relaxed mb-12">
-            I'm fascinated by the intersection of business strategy, emerging technologies, and the deeper questions about meaning and impact. 
-            Through consulting, content creation, and community building, I'm exploring how we can build smarter, more intentional futures.
-          </p>
         </motion.div>
 
         <div className="grid gap-12">
@@ -81,7 +77,7 @@ export default function About() {
               <Heart className="w-6 h-6 text-primary" />
               <h2 className="text-2xl font-display font-bold">Beyond the Resume</h2>
             </div>
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-3 gap-6">
               <div className="bg-background border p-6 rounded-xl shadow-sm">
                 <Music className="w-8 h-8 text-accent mb-4" />
                 <h4 className="font-bold mb-2">Musician</h4>
@@ -91,6 +87,11 @@ export default function About() {
                 <HomeIcon className="w-8 h-8 text-primary mb-4" />
                 <h4 className="font-bold mb-2">Real Estate Agent</h4>
                 <p className="text-sm text-muted-foreground">Licensed in California primarily for personal investing. While I'm not currently representing clients, I'm well connected to excellent brokers in the San Diego area and happy to make thoughtful referrals. I'm also always glad to talk shop on real estate investing—ADUs, rental cash flow, house hacking, and related decisions.</p>
+              </div>
+              <div className="bg-background border p-6 rounded-xl shadow-sm">
+                <Users className="w-8 h-8 text-accent mb-4" />
+                <h4 className="font-bold mb-2">Volunteer & Organizer</h4>
+                <p className="text-sm text-muted-foreground">My brother's diagnosis with Juvenile Dermatomyositis led my family to start the Cure JM Foundation, an experience that shaped my childhood and how I think about what matters.</p>
               </div>
             </div>
           </motion.section>
