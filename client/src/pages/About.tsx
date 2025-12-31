@@ -96,6 +96,18 @@ export default function About() {
             </div>
           </motion.section>
 
+          {/* Divider */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-4 py-12"
+          >
+            <div className="flex-1 h-px bg-border"></div>
+            <p className="text-sm text-muted-foreground whitespace-nowrap">Other things that make me happy</p>
+            <div className="flex-1 h-px bg-border"></div>
+          </motion.div>
+
           {/* Photo Collage */}
           <motion.section
             initial={{ opacity: 0 }}
