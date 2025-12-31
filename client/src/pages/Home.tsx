@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Mic, Users, LineChart } from "lucide-react";
 import { Link } from "wouter";
+import { useState } from "react";
 
 export default function Home() {
   const fadeIn = {
@@ -12,7 +13,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-6 max-w-7xl mx-auto">
+      <section className="relative pt-16 pb-12 md:pt-24 md:pb-20 px-6 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div 
             initial="initial"
@@ -28,10 +29,10 @@ export default function Home() {
             <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-display font-bold text-foreground leading-[1.1] mb-6">
               Cole Hume
             </motion.h1>
-            <motion.p variants={fadeIn} className="text-lg md:text-xl text-muted-foreground font-light mb-3 max-w-lg">
+            <motion.p variants={fadeIn} className="text-lg md:text-xl text-muted-foreground font-light mb-2 max-w-lg">
               Here for the big curiosities and small inputs that make life wonderful
             </motion.p>
-            <motion.p variants={fadeIn} className="text-base text-muted-foreground/80 font-light mb-8 max-w-lg leading-relaxed">
+            <motion.p variants={fadeIn} className="text-base text-muted-foreground/80 font-light mb-6 max-w-lg leading-relaxed">
               I believe business can do real good and be really enjoyable. Experience across AI and technology, consumer, and healthcare.
             </motion.p>
             
@@ -67,16 +68,8 @@ export default function Home() {
       </section>
 
       {/* Roles Section */}
-      <section className="bg-secondary/30 py-24">
+      <section className="bg-secondary/30 py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">Navigating the Chaotic, Wonderful 20s</h2>
-          </motion.div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -87,12 +80,14 @@ export default function Home() {
               {
                 icon: <Mic className="w-8 h-8 text-accent" />,
                 title: "Media & Content",
-                desc: "Hosting 'Young, Smart, & Battling Broke'—exploring entrepreneurship and mindset."
+                desc: "Hosting 'Young, Smart, & Battling Broke'—exploring professional, financial, and life insights.",
+                link: "/content"
               },
               {
                 icon: <Users className="w-8 h-8 text-primary" />,
                 title: "Community & Impact",
-                desc: "I believe community is the most important ingredient to happiness. I find real joy in learning about people, listening carefully, and connecting thoughtful individuals whenever I can."
+                desc: "I find real joy in learning about people and connecting thoughtful individuals whenever I can.",
+                link: "/contact"
               }
             ].map((item, i) => (
               <motion.div 
@@ -101,11 +96,20 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-background p-8 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow"
               >
-                <div className="mb-6 p-3 bg-secondary rounded-xl w-fit">{item.icon}</div>
-                <h3 className="text-xl font-bold font-display mb-3">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+                {item.link ? (
+                  <Link href={item.link} className="block bg-background p-8 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow h-full cursor-pointer">
+                    <div className="mb-6 p-3 bg-secondary rounded-xl w-fit">{item.icon}</div>
+                    <h3 className="text-xl font-bold font-display mb-3">{item.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </Link>
+                ) : (
+                  <div className="bg-background p-8 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow h-full">
+                    <div className="mb-6 p-3 bg-secondary rounded-xl w-fit">{item.icon}</div>
+                    <h3 className="text-xl font-bold font-display mb-3">{item.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>

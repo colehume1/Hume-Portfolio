@@ -10,9 +10,9 @@ export default function Content() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">Navigating the Chaotic but Wonderful 20s</h1>
+          <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">Navigating the Chaotic, Wonderful 20s</h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Young, Smart, & Battling Broke is a media platform for people figuring out work, money, and meaning in real time. We explore careers, entrepreneurship, finances, and personal growth with honesty, curiosity, and long-term thinking.
+            Young, Smart, & Battling Broke is a media platform for ambitious young people solving the work thing, the money thing, and the meaning thing. We explore careers, entrepreneurship, finances, and personal growth with honesty, curiosity, and long-term thinking.
           </p>
         </motion.div>
 
