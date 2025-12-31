@@ -143,7 +143,7 @@ export default function Content() {
                   </li>
                   <li className="flex items-start gap-2 text-sm text-muted-foreground">
                     <span className="text-accent mt-1">•</span>
-                    Networking for introverts in consulting
+                    Letter to new grads on job adulthood
                   </li>
                 </ul>
               </div>
