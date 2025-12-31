@@ -7,7 +7,7 @@ export function Footer() {
         <div className="text-center md:text-left">
           <h3 className="font-display text-2xl font-bold mb-2">Cole Hume</h3>
           <p className="text-primary-foreground/70 max-w-xs">
-            Creating a loving impact through business, content, and community.
+            I hope to have a loving impact through building businesses, sharing what I learn, and investing in community.
           </p>
         </div>
 

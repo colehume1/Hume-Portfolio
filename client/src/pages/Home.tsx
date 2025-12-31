@@ -29,11 +29,8 @@ export default function Home() {
             <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-display font-bold text-foreground leading-[1.1] mb-6">
               Cole Hume
             </motion.h1>
-            <motion.p variants={fadeIn} className="text-lg md:text-xl text-muted-foreground font-light mb-2 max-w-lg">
+            <motion.p variants={fadeIn} className="text-lg md:text-xl text-muted-foreground font-light mb-6 max-w-lg">
               Here for the big curiosities and small inputs that make life wonderful
-            </motion.p>
-            <motion.p variants={fadeIn} className="text-base text-muted-foreground/80 font-light mb-6 max-w-lg leading-relaxed">
-              I believe business can do real good and be really enjoyable. Experience across AI and technology, consumer, and healthcare.
             </motion.p>
             
             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
@@ -75,7 +72,7 @@ export default function Home() {
               {
                 icon: <LineChart className="w-8 h-8 text-primary" />,
                 title: "Strategy & Consulting",
-                desc: "Solving complex problems as an Associate at Boston Consulting Group (BCG)."
+                desc: "Solving complex problems as an Associate Consultant at Boston Consulting Group (BCG)."
               },
               {
                 icon: <Mic className="w-8 h-8 text-accent" />,
