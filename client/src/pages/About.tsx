@@ -192,13 +192,13 @@ export default function About() {
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                   <p className="relative text-white text-sm leading-tight p-4 font-medium">
-                    Click this photo to watch a video of my journey meeting the Nate family.
+                    Click this photo to watch a video of my time with the incredibly special Nate family from when I studied in Japan.
                   </p>
                 </motion.div>
                 <div className="absolute inset-0 sm:hidden flex items-end justify-start rounded-lg">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                   <p className="relative text-white text-sm leading-tight p-4 font-medium">
-                    Click this photo to watch a video of my journey meeting the Nate family.
+                    Click this photo to watch a video of my time with the incredibly special Nate family from when I studied in Japan.
                   </p>
                 </div>
               </motion.a>
