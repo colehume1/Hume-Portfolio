@@ -47,7 +47,7 @@ export default function About() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <p className="relative text-white text-sm leading-tight p-4 font-medium">Raised in San Diego, I love surfing Beacons Beach and hanging with my family pup, Koda</p>
+                  <p className="relative text-white text-sm leading-tight p-4 font-medium">Raised in San Diego, I love surfing Beacons and hanging with this ferocious bear, Koda</p>
                 </motion.div>
                 {visibleCaption === 0 && (
                   <div className="absolute inset-0 sm:hidden flex items-end justify-start rounded-lg">
