@@ -80,9 +80,7 @@ export default function About() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <p className="relative text-white text-sm leading-tight p-4 font-medium">
-                    Health nerd. Ran my first marathon in 2025.
-                  </p>
+                  <p className="relative text-white text-sm leading-tight p-4 font-medium">I run at grandpa pace but love anything that has me moving</p>
                 </motion.div>
                 {visibleCaption === 1 && (
                   <div className="absolute inset-0 sm:hidden flex items-end justify-start rounded-lg">
