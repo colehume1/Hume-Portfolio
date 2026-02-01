@@ -147,9 +147,6 @@ export default function About() {
               <p>Alongside my work as a consultant at Boston Consulting Group (BCG), I spend a lot of time thinking about how technology shapes human decision-making and how responsibility fits as systems become more powerful. In 2022, as concerns around AI safety and misuse grew more urgent, I helped re-found the AI Robotics Ethics Society (AIRES) at UCLA. </p>
               <p>I am a generalist, an engineer's business guy, and drawn to work that rewards initiative, a dose of EQ, and intellectual rigor.</p>
               <p>
-                In 2024, I co-founded a home health and wellness inspection company, working closely with customers and service design. We ultimately paused the venture after running into technical constraints that made it difficult to deliver the level of rigor we felt was necessary. While the company did not continue, the experience reinforced my interest in building things carefully and my appetite for early-stage, ambiguous work has not gone away.
-              </p>
-              <p>
                 Across these experiences, I am most drawn to work that rewards clarity of thought, intellectual honesty, and long-term responsibility, especially where technology, business, and human values intersect.
               </p>
             </div>
