@@ -106,50 +106,6 @@ export default function Content() {
           </div>
         </motion.section>
 
-        {/* Newsletter Section */}
-        <motion.div 
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           className="bg-secondary rounded-3xl p-8 md:p-12 flex flex-col justify-between border border-secondary-foreground/5 max-w-2xl mx-auto"
-        >
-            <div>
-              <Newspaper className="w-12 h-12 mb-6 text-primary" />
-              <h2 className="text-3xl font-display font-bold mb-4">The Newsletter</h2>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                Weekly insights on money, career strategy, and life design. 
-                Join hundreds of readers who are redefining what it means to be "rich" in your 20s.
-              </p>
-              
-              <div className="bg-background rounded-xl p-6 shadow-sm border border-border mb-8">
-                <h3 className="font-bold mb-2">Recent Topics:</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <span className="text-accent mt-1">•</span>
-                    How to take a "mini retirement" without ruining your career
-                  </li>
-                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <span className="text-accent mt-1">•</span>
-                    The math behind 7-figure creative businesses
-                  </li>
-                  <li className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <span className="text-accent mt-1">•</span>
-                    Letter to new grads on job adulthood
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <a 
-              href="https://colehume1.substack.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-full px-8 py-4 rounded-xl bg-primary text-primary-foreground font-bold hover:opacity-90 transition-all shadow-lg shadow-primary/20 hover:shadow-primary/30"
-            >
-              Read on Substack <ArrowRight className="ml-2 w-4 h-4" />
-            </a>
-        </motion.div>
-
         {/* Latest Writing Section */}
         <motion.section
           initial={{ opacity: 0 }}
