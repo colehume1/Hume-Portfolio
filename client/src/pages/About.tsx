@@ -111,9 +111,7 @@ export default function About() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                  <p className="relative text-white text-sm leading-tight p-4 font-medium">
-                    Click this photo to watch a video of my time with the incredibly special Nate family from when I studied in Japan.
-                  </p>
+                  <p className="relative text-white text-sm leading-tight p-4 font-medium">Click this to watch a video the Nate family made that makes me smile and ugly cry</p>
                 </motion.div>
                 <div className="absolute inset-0 sm:hidden flex items-end justify-start rounded-lg">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
