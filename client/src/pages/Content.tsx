@@ -106,50 +106,13 @@ export default function Content() {
           </div>
         </motion.section>
 
-        {/* Detailed Platform Sections */}
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Podcast Section */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="bg-primary text-primary-foreground rounded-3xl p-8 md:p-12 relative overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 p-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
-            
-            <Mic className="w-12 h-12 mb-6 text-accent" />
-            <h2 className="text-3xl font-display font-bold mb-4">The Podcast</h2>
-            <p className="text-primary-foreground/80 mb-8 leading-relaxed">
-              Deep dive interviews with CEOs, founders, and young professionals building 7-figure businesses. 
-              We deconstruct their playbooks and mindset.
-            </p>
-
-            <div className="space-y-4">
-              {[
-                { name: "Apple Podcasts", url: "https://podcasts.apple.com/ca/podcast/young-smart-battling-broke/id1782582039" },
-                { name: "Spotify", url: "https://open.spotify.com/show/1A1qgRoVWPYYlm0qJB5NHI" }
-              ].map((platform) => (
-                <a 
-                  key={platform.name}
-                  href={platform.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between p-4 rounded-xl bg-white/10 hover:bg-white/20 transition-colors group"
-                >
-                  <span className="font-medium">{platform.name}</span>
-                  <ExternalLink className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Newsletter Section */}
-          <motion.div 
-             initial={{ opacity: 0, x: 20 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
-             className="bg-secondary rounded-3xl p-8 md:p-12 flex flex-col justify-between border border-secondary-foreground/5"
-          >
+        {/* Newsletter Section */}
+        <motion.div 
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           className="bg-secondary rounded-3xl p-8 md:p-12 flex flex-col justify-between border border-secondary-foreground/5 max-w-2xl mx-auto"
+        >
             <div>
               <Newspaper className="w-12 h-12 mb-6 text-primary" />
               <h2 className="text-3xl font-display font-bold mb-4">The Newsletter</h2>
@@ -185,8 +148,7 @@ export default function Content() {
             >
               Read on Substack <ArrowRight className="ml-2 w-4 h-4" />
             </a>
-          </motion.div>
-        </div>
+        </motion.div>
 
         {/* Latest Writing Section */}
         <motion.section
