@@ -63,7 +63,7 @@ Preferred communication style: Simple, everyday language.
 - **connect-pg-simple**: PostgreSQL session store (available but not currently used)
 
 ### Third-Party Services
-- No external API integrations currently active
+- **Substack RSS Feed**: Auto-imports posts from `https://colehume1.substack.com/feed` via server-side `/api/posts` endpoint with 10-minute caching
 - Build includes optional support for: Stripe, OpenAI, Google Generative AI, Nodemailer (dependencies present but not implemented)
 
 ### Key Runtime Dependencies
@@ -73,3 +73,4 @@ Preferred communication style: Simple, everyday language.
 - `@tanstack/react-query`: Client-side data fetching and caching
 - `framer-motion`: Animation library
 - `react-hook-form`: Form state management
+- `rss-parser`: RSS feed parsing for Substack integration

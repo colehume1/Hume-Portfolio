@@ -1,7 +1,37 @@
 import { motion } from "framer-motion";
-import { Mic, Newspaper, ExternalLink, ArrowRight, Youtube } from "lucide-react";
+import { Mic, Newspaper, ExternalLink, ArrowRight, Youtube, Loader2, AlertCircle } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+
+interface SubstackPost {
+  title: string;
+  link: string;
+  pubDate: string;
+  excerpt: string;
+}
+
+interface PostsResponse {
+  posts: SubstackPost[];
+  error?: string;
+}
+
+const POSTS_TO_SHOW = 8;
+
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric', 
+    year: 'numeric' 
+  });
+}
 
 export default function Content() {
+  const { data, isLoading, error } = useQuery<PostsResponse>({
+    queryKey: ['/api/posts'],
+  });
+
+  const posts = data?.posts?.slice(0, POSTS_TO_SHOW) || [];
+
   return (
     <div className="pb-20">
       <div className="max-w-4xl mx-auto px-6">
@@ -159,6 +189,82 @@ export default function Content() {
             </a>
           </motion.div>
         </div>
+
+        {/* Latest Writing Section */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-20"
+        >
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl md:text-3xl font-display font-bold">Latest Writing</h2>
+            <a 
+              href="https://colehume1.substack.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-sm text-accent hover:text-primary transition-colors flex items-center gap-1"
+            >
+              View all <ArrowRight className="w-3 h-3" />
+            </a>
+          </div>
+
+          {isLoading && (
+            <div className="flex items-center justify-center py-12">
+              <Loader2 className="w-8 h-8 text-primary animate-spin" />
+            </div>
+          )}
+
+          {error && (
+            <div className="bg-secondary/50 rounded-xl p-6 text-center">
+              <AlertCircle className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
+              <p className="text-muted-foreground">Unable to load posts right now. Check back later or visit Substack directly.</p>
+              <a 
+                href="https://colehume1.substack.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 mt-4 text-accent hover:text-primary transition-colors"
+              >
+                Go to Substack <ExternalLink className="w-4 h-4" />
+              </a>
+            </div>
+          )}
+
+          {!isLoading && !error && posts.length === 0 && (
+            <div className="bg-secondary/50 rounded-xl p-6 text-center">
+              <p className="text-muted-foreground">No posts available yet.</p>
+            </div>
+          )}
+
+          {!isLoading && !error && posts.length > 0 && (
+            <div className="grid sm:grid-cols-2 gap-6">
+              {posts.map((post, index) => (
+                <motion.a
+                  key={post.link}
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  whileHover={{ y: -4 }}
+                  className="group bg-background border rounded-xl p-6 hover:border-primary/50 transition-colors"
+                  data-testid={`post-card-${index}`}
+                >
+                  <span className="text-xs text-muted-foreground">{formatDate(post.pubDate)}</span>
+                  <h3 className="font-bold text-lg mt-2 mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground line-clamp-3">{post.excerpt}</p>
+                  <div className="flex items-center gap-2 mt-4 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                    Read more <ExternalLink className="w-3 h-3" />
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          )}
+        </motion.section>
       </div>
     </div>
   );
