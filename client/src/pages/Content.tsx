@@ -52,6 +52,10 @@ export default function Content() {
           viewport={{ once: true }}
           className="mb-20"
         >
+          <p className="text-center text-muted-foreground mb-12">
+            Find my conversations and ideas across writing, video, and audio.
+          </p>
+          
           <div className="grid sm:grid-cols-3 gap-6">
             {/* YouTube Card */}
             <motion.a
