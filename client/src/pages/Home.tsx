@@ -76,7 +76,7 @@ export default function Home() {
               {
                 icon: <Mic className="w-8 h-8 text-accent" />,
                 title: "Media & Content",
-                desc: "Hosting 'Young, Smart, & Battling Broke'—exploring professional, financial, and life insights.",
+                desc: "'Young, Smart, & Battling Broke' spotlights wise mentors and career insights",
                 link: "#content"
               },
               {
