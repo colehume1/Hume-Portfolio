@@ -33,7 +33,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="pt-32 pb-20 min-h-screen">
+    <div className="pb-20">
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16">
         
         <motion.div

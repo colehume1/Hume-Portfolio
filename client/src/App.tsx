@@ -15,9 +15,6 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/content" component={Content} />
-      <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
     </Switch>
   );

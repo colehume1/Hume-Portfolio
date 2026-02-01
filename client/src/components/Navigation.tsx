@@ -5,10 +5,10 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/content", label: "Content" },
-  { href: "/contact", label: "Contact" },
+  { href: "#", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#content", label: "Content" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export function Navigation() {
@@ -18,27 +18,25 @@ export function Navigation() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/" className="font-display text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity">
+        <a href="#" className="font-display text-2xl font-bold tracking-tight hover:opacity-80 transition-opacity">
           CH.
-        </Link>
+        </a>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {links.map((link) => (
-            <Link
+            <a
               key={link.href}
               href={link.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary relative group",
-                location === link.href ? "text-primary" : "text-muted-foreground"
+                "text-sm font-medium transition-colors hover:text-primary relative group text-muted-foreground"
               )}
             >
               {link.label}
               <span className={cn(
-                "absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ease-out",
-                location === link.href ? "w-full" : "w-0 group-hover:w-full"
+                "absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ease-out w-0 group-hover:w-full"
               )} />
-            </Link>
+            </a>
           ))}
         </div>
 
@@ -62,17 +60,16 @@ export function Navigation() {
           >
             <div className="px-6 py-6 flex flex-col gap-4">
               {links.map((link) => (
-                <Link
+                <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "text-lg font-medium py-2 transition-colors",
-                    location === link.href ? "text-primary" : "text-muted-foreground"
+                    "text-lg font-medium py-2 transition-colors text-muted-foreground hover:text-primary"
                   )}
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
             </div>
           </motion.div>

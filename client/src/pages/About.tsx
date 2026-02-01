@@ -8,7 +8,7 @@ import guitarPhoto from "@assets/Yuito_an_Cole_1767124821582.png";
 export default function About() {
   const [visibleCaption, setVisibleCaption] = useState<number | null>(null);
   return (
-    <div className="pt-32 pb-20 min-h-screen">
+    <div className="pb-20">
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
