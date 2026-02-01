@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Mic, Users, LineChart } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import About from "./About";
 import Content from "./Content";
@@ -60,55 +60,6 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Roles Section */}
-      <section className="bg-secondary/30 py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <LineChart className="w-8 h-8 text-primary" />,
-                title: "Strategy & Consulting",
-                desc: "Solving complex problems as an Associate at Boston Consulting Group (BCG)"
-              },
-              {
-                icon: <Mic className="w-8 h-8 text-accent" />,
-                title: "Media & Content",
-                desc: "'Young, Smart, & Battling Broke' spotlights wise mentors and career insights",
-                link: "#content"
-              },
-              {
-                icon: <Users className="w-8 h-8 text-primary" />,
-                title: "Community & Impact",
-                desc: "I find meaning and joy in learning about and connecting good people",
-                link: "#contact"
-              }
-            ].map((item, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                {item.link ? (
-                  <a href={item.link} className="block bg-background p-8 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow h-full cursor-pointer">
-                    <div className="mb-6 p-3 bg-secondary rounded-xl w-fit">{item.icon}</div>
-                    <h3 className="text-xl font-bold font-display mb-3">{item.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
-                  </a>
-                ) : (
-                  <div className="bg-background p-8 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow h-full">
-                    <div className="mb-6 p-3 bg-secondary rounded-xl w-fit">{item.icon}</div>
-                    <h3 className="text-xl font-bold font-display mb-3">{item.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
