@@ -144,9 +144,7 @@ export default function About() {
               <p>
                 During college, I lost my ability to read for several months due to a rare form of epilepsy, with an initial prognosis that it might be permanent. That period clarified something important for me: meaning is not derived from mere skill or labor, but from the ability to have a real, loving impact. When my reading ability returned after finding a medication with unusually high efficacy for me, it became equally clear that thoughtful communication and careful thinking around complex problems are the ways I can do the most good.
               </p>
-              <p>
-                Alongside my work as a consultant at Boston Consulting Group (BCG), I spend a lot of time thinking about how technology shapes human decision-making and how responsibility fits as systems become more powerful. In 2022, as concerns around AI safety and misuse grew more urgent, I helped re-found the AI Robotics Ethics Society (AIRES) at UCLA. The organization sat at the intersection of philosophy and computer science and reflected a long-standing interest in building ambitious systems without being careless about their consequences.
-              </p>
+              <p>Alongside my work as a consultant at Boston Consulting Group (BCG), I spend a lot of time thinking about how technology shapes human decision-making and how responsibility fits as systems become more powerful. In 2022, as concerns around AI safety and misuse grew more urgent, I helped re-found the AI Robotics Ethics Society (AIRES) at UCLA. </p>
               <p>
                 My thinking is shaped by work that crosses disciplines rather than staying neatly inside them. Books like Gödel, Escher, Bach influenced how I see computation not just as a technical tool, but as a way of understanding structure, meaning, and limits. That perspective continues to guide how I approach problems that sit between logic, creativity, and human judgment.
               </p>
