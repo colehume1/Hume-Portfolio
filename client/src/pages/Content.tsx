@@ -198,7 +198,7 @@ export default function Content() {
           className="mt-20"
         >
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-display font-bold" data-testid="text-latest-writing-title">Latest Writing</h2>
+            <h2 className="text-2xl md:text-3xl font-display font-bold" data-testid="text-latest-writing-title">Latest conversations, ideas, & deep dives</h2>
             <a 
               href="https://colehume1.substack.com" 
               target="_blank" 
