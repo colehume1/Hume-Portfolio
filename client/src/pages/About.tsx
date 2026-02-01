@@ -142,29 +142,11 @@ export default function About() {
             </div>
             <div className="space-y-6 text-sm text-muted-foreground leading-[1.65]">
               <p>
-                During college, I lost my ability to read for several months due to a rare form of epilepsy, with an initial prognosis that it might be permanent. That period clarified something important for me: meaning is not derived from mere skill or labor, but from the ability to have a real, loving impact. When my reading ability returned after finding a medication with unusually high efficacy for me, it became equally clear that thoughtful communication and careful thinking around complex problems are the ways I can do the most good.
+                During college, I lost my ability to read for several months due to a rare form of epilepsy, with an initial prognosis that it might be permanent. That period clarified something important for me: meaning is not derived from mere skill or labor, but from the ability to have a real, <a href="#loving-impact" className="text-accent hover:underline">loving impact</a>. When my reading ability returned after finding a medication with unusually high efficacy for me, it became equally clear that thoughtful communication and careful thinking around complex problems are the ways I can do the most good.
               </p>
               <p>Alongside my work as a consultant at Boston Consulting Group (BCG), I spend a lot of time thinking about how technology shapes human decision-making and how responsibility fits as systems become more powerful. In 2022, as concerns around AI safety and misuse grew more urgent, I helped re-found the AI Robotics Ethics Society (AIRES) at UCLA. </p>
               <p>I am a generalist, an engineer's business guy, and drawn to work that rewards initiative, a dose of EQ, and intellectual rigor.</p>
             </div>
-          </motion.section>
-
-          {/* A Loving Impact */}
-          <motion.section
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="bg-secondary/40 p-8 rounded-2xl border border-secondary"
-          >
-            <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <span className="text-accent text-2xl">✦</span> A Loving Impact
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              I'll be the first to admit this is hard to operationalize. You can't spreadsheet "love" and it doesn't map cleanly to outcomes or titles. But across every health scare, career decision, and personal reset, my sense of meaning keeps resolving to the same place.
-            </p>
-            <p className="text-muted-foreground">
-              If I can help a few people say "I love" a little more often, I'll consider my life well spent. That might mean loving the spaces we inhabit, the communities we build, or the technologies and systems we choose to bring into the world.
-            </p>
           </motion.section>
 
           {/* Multifaceted Interests */}
@@ -194,6 +176,25 @@ export default function About() {
                 <p className="text-sm text-muted-foreground">My brother's diagnosis with Juvenile Dermatomyositis led my family to start the Cure JM Foundation, an experience that shaped my childhood and how I think about what matters.</p>
               </div>
             </div>
+          </motion.section>
+
+          {/* A Loving Impact */}
+          <motion.section
+            id="loving-impact"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="bg-secondary/40 p-8 rounded-2xl border border-secondary"
+          >
+            <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <span className="text-accent text-2xl">✦</span> A Loving Impact
+            </h3>
+            <p className="text-muted-foreground mb-4">
+              I'll be the first to admit this is hard to operationalize. You can't spreadsheet "love" and it doesn't map cleanly to outcomes or titles. But across every health scare, career decision, and personal reset, my sense of meaning keeps resolving to the same place.
+            </p>
+            <p className="text-muted-foreground">
+              If I can help a few people say "I love" a little more often, I'll consider my life well spent. That might mean loving the spaces we inhabit, the communities we build, or the technologies and systems we choose to bring into the world.
+            </p>
           </motion.section>
         </div>
       </div>

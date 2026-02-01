@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   /* Minimalist, Professional Palette */
   /* Warm/Organic undertones for "loving impact" */
