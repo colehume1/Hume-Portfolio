@@ -23,7 +23,7 @@ function Router() {
 
 function App() {
   useEffect(() => {
-    let idleTimeout: NodeJS.Timeout;
+    let idleTimeout: any;
     const handleMouseMove = () => {
       document.documentElement.classList.add('mouse-moving');
       document.body.classList.add('mouse-moving');
@@ -32,11 +32,14 @@ function App() {
       idleTimeout = setTimeout(() => {
         document.documentElement.classList.remove('mouse-moving');
         document.body.classList.remove('mouse-moving');
-      }, 125); // Target 100-150ms
+      }, 150); 
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      clearTimeout(idleTimeout);
+    };
   }, []);
 
   return (

@@ -66,13 +66,17 @@
 }
 
 @layer base {
+  * {
+    cursor: inherit !important;
+  }
+
   html, body {
-    cursor: var(--cursor-idle) 16 16, auto;
+    cursor: url('/assets/sloth-idle.png') 16 16, auto !important;
     transition: cursor 0.1s ease;
   }
 
   body.mouse-moving, html.mouse-moving {
-    cursor: var(--cursor-move) 16 16, auto;
+    cursor: url('/assets/sloth-move.png') 16 16, auto !important;
   }
 
   body {
