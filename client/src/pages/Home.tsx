@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Mic, Users, LineChart } from "lucide-react";
 import { Link } from "wouter";
-import { useState } from "react";
+import About from "./About";
+import Content from "./Content";
+import Contact from "./Contact";
 
 export default function Home() {
   const fadeIn = {
@@ -30,16 +32,16 @@ export default function Home() {
               Cole Hume
             </motion.h1>
             <motion.p variants={fadeIn} className="text-lg md:text-xl text-muted-foreground font-light mb-6 max-w-lg">
-              Live for the big ideas and small inputs that make life brilliant
+              live for big ideas, small inputs, & good people
             </motion.p>
             
             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
-              <Link href="/contact" className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity">
+              <a href="#contact" className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity">
                 Get in Touch
-              </Link>
-              <Link href="/content" className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-secondary text-secondary-foreground font-medium hover:bg-secondary/80 transition-colors group">
+              </a>
+              <a href="#content" className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-secondary text-secondary-foreground font-medium hover:bg-secondary/80 transition-colors group">
                 View Content <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </a>
             </motion.div>
           </motion.div>
 
@@ -47,11 +49,9 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
+            className="flex justify-center md:justify-end"
           >
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-muted relative">
-              {/* Using a placeholder for Cole - normally would be his photo */}
-              {/* Professional headshot placeholder */}
+            <div className="w-full max-w-[320px] aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-muted relative">
               <img 
                 src="/cole-profile.png" 
                 alt="Cole Hume"
@@ -59,7 +59,6 @@ export default function Home() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
             </div>
-            
           </motion.div>
         </div>
       </section>
@@ -78,13 +77,13 @@ export default function Home() {
                 icon: <Mic className="w-8 h-8 text-accent" />,
                 title: "Media & Content",
                 desc: "Hosting 'Young, Smart, & Battling Broke'—exploring professional, financial, and life insights.",
-                link: "/content"
+                link: "#content"
               },
               {
                 icon: <Users className="w-8 h-8 text-primary" />,
                 title: "Community & Impact",
                 desc: "I find real joy in learning about people and connecting thoughtful individuals whenever I can.",
-                link: "/contact"
+                link: "#contact"
               }
             ].map((item, i) => (
               <motion.div 
@@ -95,11 +94,11 @@ export default function Home() {
                 transition={{ delay: i * 0.1 }}
               >
                 {item.link ? (
-                  <Link href={item.link} className="block bg-background p-8 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow h-full cursor-pointer">
+                  <a href={item.link} className="block bg-background p-8 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow h-full cursor-pointer">
                     <div className="mb-6 p-3 bg-secondary rounded-xl w-fit">{item.icon}</div>
                     <h3 className="text-xl font-bold font-display mb-3">{item.title}</h3>
                     <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
-                  </Link>
+                  </a>
                 ) : (
                   <div className="bg-background p-8 rounded-2xl shadow-sm border border-border hover:shadow-md transition-shadow h-full">
                     <div className="mb-6 p-3 bg-secondary rounded-xl w-fit">{item.icon}</div>
@@ -112,6 +111,17 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Single Page Sections */}
+      <div id="about">
+        <About />
+      </div>
+      <div id="content">
+        <Content />
+      </div>
+      <div id="contact">
+        <Contact />
+      </div>
     </div>
   );
 }
