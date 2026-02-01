@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Mic, Newspaper, ExternalLink, ArrowRight, Youtube } from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
+import { HandDrawnIcons } from "@/components/HandDrawnIcons";
 
 export default function Content() {
   return (
@@ -36,7 +37,7 @@ export default function Content() {
               whileHover={{ y: -4 }}
               className="group bg-background border rounded-xl p-8 text-center hover:border-primary/50 transition-colors"
             >
-              <Youtube className="w-10 h-10 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <HandDrawnIcons.Youtube className="w-10 h-10 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
               <h3 className="font-bold text-lg mb-2">Video Essays & Conversations</h3>
               <p className="text-sm text-muted-foreground">Long-form explorations on YouTube</p>
               <div className="flex items-center justify-center gap-2 mt-4 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
@@ -52,7 +53,7 @@ export default function Content() {
               whileHover={{ y: -4 }}
               className="group bg-background border rounded-xl p-8 text-center hover:border-primary/50 transition-colors"
             >
-              <Newspaper className="w-10 h-10 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <HandDrawnIcons.Newspaper className="w-10 h-10 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
               <h3 className="font-bold text-lg mb-2">Writing & Newsletter</h3>
               <p className="text-sm text-muted-foreground">Weekly insights on Substack</p>
               <div className="flex items-center justify-center gap-2 mt-4 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
@@ -68,7 +69,7 @@ export default function Content() {
               whileHover={{ y: -4 }}
               className="group bg-background border rounded-xl p-8 text-center hover:border-primary/50 transition-colors"
             >
-              <Mic className="w-10 h-10 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <HandDrawnIcons.Mic className="w-10 h-10 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
               <h3 className="font-bold text-lg mb-2">Podcast</h3>
               <p className="text-sm text-muted-foreground">Deep-dive conversations</p>
               <div className="flex items-center justify-center gap-2 mt-4 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
@@ -89,7 +90,7 @@ export default function Content() {
           >
             <div className="absolute top-0 right-0 p-32 bg-white/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
             
-            <Mic className="w-12 h-12 mb-6 text-accent" />
+            <HandDrawnIcons.Mic className="w-12 h-12 mb-6 text-accent" />
             <h2 className="text-3xl font-display font-bold mb-4">The Podcast</h2>
             <p className="text-primary-foreground/80 mb-8 leading-relaxed">
               Deep dive interviews with CEOs, founders, and young professionals building 7-figure businesses. 
@@ -123,7 +124,7 @@ export default function Content() {
              className="bg-secondary rounded-3xl p-8 md:p-12 flex flex-col justify-between border border-secondary-foreground/5"
           >
             <div>
-              <Newspaper className="w-12 h-12 mb-6 text-primary" />
+              <HandDrawnIcons.Newspaper className="w-12 h-12 mb-6 text-primary" />
               <h2 className="text-3xl font-display font-bold mb-4">The Newsletter</h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Weekly insights on money, career strategy, and life design. 

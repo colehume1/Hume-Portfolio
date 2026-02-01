@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Mic, Users, LineChart } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import About from "./About";
 import Content from "./Content";
 import Contact from "./Contact";
+import { HandDrawnIcons } from "@/components/HandDrawnIcons";
 
 export default function Home() {
   const fadeIn = {
@@ -69,18 +70,18 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                icon: <LineChart className="w-8 h-8 text-primary" />,
+                icon: <HandDrawnIcons.Chart className="w-8 h-8 text-primary" />,
                 title: "Strategy & Consulting",
                 desc: "Solving complex problems as an Associate Consultant at Boston Consulting Group (BCG)."
               },
               {
-                icon: <Mic className="w-8 h-8 text-accent" />,
+                icon: <HandDrawnIcons.Mic className="w-8 h-8 text-accent" />,
                 title: "Media & Content",
                 desc: "Hosting 'Young, Smart, & Battling Broke'—exploring professional, financial, and life insights.",
                 link: "#content"
               },
               {
-                icon: <Users className="w-8 h-8 text-primary" />,
+                icon: <HandDrawnIcons.Users className="w-8 h-8 text-primary" />,
                 title: "Community & Impact",
                 desc: "I find real joy in learning about people and connecting thoughtful individuals whenever I can.",
                 link: "#contact"

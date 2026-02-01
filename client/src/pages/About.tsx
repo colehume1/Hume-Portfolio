@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { GraduationCap, Briefcase, Heart, Music, Home as HomeIcon, Users } from "lucide-react";
+import { GraduationCap, Briefcase, Heart } from "lucide-react";
 import { useState } from "react";
+import { HandDrawnIcons } from "@/components/HandDrawnIcons";
 import dogPhoto from "@assets/IMG_5385_1767124821581.PNG";
 import runningPhoto from "@assets/IMG_6420_1767124821582.JPG";
 import guitarPhoto from "@assets/Yuito_an_Cole_1767124821582.png";
@@ -189,17 +190,17 @@ export default function About() {
             </div>
             <div className="grid sm:grid-cols-3 gap-6">
               <div className="bg-background border p-6 rounded-xl shadow-sm">
-                <Music className="w-8 h-8 text-accent mb-4" />
+                <HandDrawnIcons.Music className="w-8 h-8 text-accent mb-4" />
                 <h4 className="font-bold mb-2">Musician</h4>
                 <p className="text-sm text-muted-foreground">I play guitar and write original songs. I've trained my voice over the past couple years and perform with friends. Music is a way I process the world, influenced by artists like Gregory Alan Isakov.</p>
               </div>
               <div className="bg-background border p-6 rounded-xl shadow-sm">
-                <HomeIcon className="w-8 h-8 text-primary mb-4" />
+                <HandDrawnIcons.House className="w-8 h-8 text-primary mb-4" />
                 <h4 className="font-bold mb-2">Real Estate Agent</h4>
                 <p className="text-sm text-muted-foreground">Licensed in California for personal investing. I'm not actively representing clients, but I enjoy talking about real estate and making introductions when I can help.</p>
               </div>
               <div className="bg-background border p-6 rounded-xl shadow-sm">
-                <Users className="w-8 h-8 text-accent mb-4" />
+                <HandDrawnIcons.Users className="w-8 h-8 text-accent mb-4" />
                 <h4 className="font-bold mb-2">Volunteer & Organizer</h4>
                 <p className="text-sm text-muted-foreground">My brother's diagnosis with Juvenile Dermatomyositis led my family to start the Cure JM Foundation, an experience that shaped my childhood and how I think about what matters.</p>
               </div>
