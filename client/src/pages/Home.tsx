@@ -71,7 +71,7 @@ export default function Home() {
               {
                 icon: <LineChart className="w-8 h-8 text-primary" />,
                 title: "Strategy & Consulting",
-                desc: "Solving complex problems as an Associate Consultant at Boston Consulting Group (BCG)."
+                desc: "Solving complex problems as an Associate at Boston Consulting Group (BCG)"
               },
               {
                 icon: <Mic className="w-8 h-8 text-accent" />,
