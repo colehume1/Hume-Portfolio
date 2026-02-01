@@ -138,7 +138,7 @@ export default function About() {
           >
             <div className="flex items-center gap-3 mb-6">
               <Briefcase className="w-6 h-6 text-primary" />
-              <h2 className="text-2xl font-display font-bold">The Professional Path</h2>
+              <h2 className="text-2xl font-display font-bold">Some of my "why's"</h2>
             </div>
             <div className="space-y-6 text-sm text-muted-foreground leading-[1.65]">
               <p>
