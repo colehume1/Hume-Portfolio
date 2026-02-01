@@ -8,6 +8,9 @@
   /* Minimalist, Professional Palette */
   /* Warm/Organic undertones for "loving impact" */
   
+  --cursor-idle: url('/assets/sloth-idle.png');
+  --cursor-move: url('/assets/sloth-move.png');
+  
   --background: 0 0% 98%;      /* Soft White */
   --foreground: 220 15% 15%;   /* Soft Black */
   
@@ -63,6 +66,15 @@
 }
 
 @layer base {
+  html, body {
+    cursor: var(--cursor-idle) 16 16, auto;
+    transition: cursor 0.1s ease;
+  }
+
+  body.mouse-moving, html.mouse-moving {
+    cursor: var(--cursor-move) 16 16, auto;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);

@@ -10,6 +10,7 @@ import About from "@/pages/About";
 import Content from "@/pages/Content";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
+import { useEffect } from "react";
 
 function Router() {
   return (
@@ -21,6 +22,23 @@ function Router() {
 }
 
 function App() {
+  useEffect(() => {
+    let idleTimeout: NodeJS.Timeout;
+    const handleMouseMove = () => {
+      document.documentElement.classList.add('mouse-moving');
+      document.body.classList.add('mouse-moving');
+      
+      clearTimeout(idleTimeout);
+      idleTimeout = setTimeout(() => {
+        document.documentElement.classList.remove('mouse-moving');
+        document.body.classList.remove('mouse-moving');
+      }, 125); // Target 100-150ms
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
