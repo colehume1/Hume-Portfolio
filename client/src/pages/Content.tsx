@@ -198,32 +198,34 @@ export default function Content() {
           className="mt-20"
         >
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl md:text-3xl font-display font-bold">Latest Writing</h2>
+            <h2 className="text-2xl md:text-3xl font-display font-bold" data-testid="text-latest-writing-title">Latest Writing</h2>
             <a 
               href="https://colehume1.substack.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-sm text-accent hover:text-primary transition-colors flex items-center gap-1"
+              className="text-sm text-accent flex items-center gap-1"
+              data-testid="link-view-all-posts"
             >
               View all <ArrowRight className="w-3 h-3" />
             </a>
           </div>
 
           {isLoading && (
-            <div className="flex items-center justify-center py-12">
+            <div className="flex items-center justify-center py-12" data-testid="status-posts-loading">
               <Loader2 className="w-8 h-8 text-primary animate-spin" />
             </div>
           )}
 
           {error && (
-            <div className="bg-secondary/50 rounded-xl p-6 text-center">
+            <div className="bg-secondary/50 rounded-xl p-6 text-center" data-testid="status-posts-error">
               <AlertCircle className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
-              <p className="text-muted-foreground">Unable to load posts right now. Check back later or visit Substack directly.</p>
+              <p className="text-muted-foreground" data-testid="text-posts-error-message">Unable to load posts right now. Check back later or visit Substack directly.</p>
               <a 
                 href="https://colehume1.substack.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-4 text-accent hover:text-primary transition-colors"
+                className="inline-flex items-center gap-2 mt-4 text-accent"
+                data-testid="link-substack-fallback"
               >
                 Go to Substack <ExternalLink className="w-4 h-4" />
               </a>
@@ -231,8 +233,8 @@ export default function Content() {
           )}
 
           {!isLoading && !error && posts.length === 0 && (
-            <div className="bg-secondary/50 rounded-xl p-6 text-center">
-              <p className="text-muted-foreground">No posts available yet.</p>
+            <div className="bg-secondary/50 rounded-xl p-6 text-center" data-testid="status-posts-empty">
+              <p className="text-muted-foreground" data-testid="text-posts-empty-message">No posts available yet.</p>
             </div>
           )}
 
@@ -249,15 +251,15 @@ export default function Content() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
                   whileHover={{ y: -4 }}
-                  className="group bg-background border rounded-xl p-6 hover:border-primary/50 transition-colors"
-                  data-testid={`post-card-${index}`}
+                  className="bg-background border rounded-xl p-6 hover-elevate"
+                  data-testid={`link-post-${index}`}
                 >
-                  <span className="text-xs text-muted-foreground">{formatDate(post.pubDate)}</span>
-                  <h3 className="font-bold text-lg mt-2 mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                  <span className="text-xs text-muted-foreground" data-testid={`text-post-date-${index}`}>{formatDate(post.pubDate)}</span>
+                  <h3 className="font-bold text-lg mt-2 mb-3 line-clamp-2" data-testid={`text-post-title-${index}`}>
                     {post.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground line-clamp-3">{post.excerpt}</p>
-                  <div className="flex items-center gap-2 mt-4 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                  <p className="text-sm text-muted-foreground line-clamp-3" data-testid={`text-post-excerpt-${index}`}>{post.excerpt}</p>
+                  <div className="flex items-center gap-2 mt-4 text-accent text-sm font-medium" data-testid={`text-post-readmore-${index}`}>
                     Read more <ExternalLink className="w-3 h-3" />
                   </div>
                 </motion.a>

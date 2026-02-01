@@ -27,10 +27,40 @@ const parser = new Parser({
   }
 });
 
+function decodeHtmlEntities(text: string): string {
+  const entities: Record<string, string> = {
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&#39;': "'",
+    '&apos;': "'",
+    '&nbsp;': ' ',
+    '&#8220;': '"',
+    '&#8221;': '"',
+    '&#8216;': "'",
+    '&#8217;': "'",
+    '&#8230;': '...',
+    '&#8212;': '—',
+    '&#8211;': '–',
+    '&#160;': ' '
+  };
+  
+  let decoded = text;
+  for (const [entity, char] of Object.entries(entities)) {
+    decoded = decoded.replace(new RegExp(entity, 'g'), char);
+  }
+  decoded = decoded.replace(/&#(\d+);/g, (_, num) => String.fromCharCode(parseInt(num, 10)));
+  decoded = decoded.replace(/&#x([a-fA-F0-9]+);/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
+  
+  return decoded;
+}
+
 function extractExcerpt(content: string): string {
   const text = content.replace(/<[^>]*>/g, '').trim();
-  if (text.length <= 150) return text;
-  return text.substring(0, 150).trim() + '...';
+  const decoded = decodeHtmlEntities(text);
+  if (decoded.length <= 150) return decoded;
+  return decoded.substring(0, 150).trim() + '...';
 }
 
 export async function registerRoutes(
