@@ -63,7 +63,11 @@ Preferred communication style: Simple, everyday language.
 - **connect-pg-simple**: PostgreSQL session store (available but not currently used)
 
 ### Third-Party Services
-- **Substack RSS Feed**: Auto-imports posts from `https://colehume1.substack.com/feed` via server-side `/api/posts` endpoint with 10-minute caching
+- **Substack RSS Feed**: Auto-imports posts from `https://colehume1.substack.com/feed` via server-side `/api/posts` endpoint
+  - **Feed cache**: 10 minutes (for RSS feed data)
+  - **OG image cache**: 24 hours (per-post og:image extraction)
+  - **Image fallbacks**: og:image → RSS image → YouTube thumbnail → placeholder
+  - **To change feed URL**: Edit `SUBSTACK_FEED_URL` constant in `server/routes.ts`
 - Build includes optional support for: Stripe, OpenAI, Google Generative AI, Nodemailer (dependencies present but not implemented)
 
 ### Key Runtime Dependencies

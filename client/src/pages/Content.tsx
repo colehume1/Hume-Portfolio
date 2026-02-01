@@ -7,6 +7,7 @@ interface SubstackPost {
   link: string;
   pubDate: string;
   excerpt: string;
+  image: string | null;
 }
 
 interface PostsResponse {
@@ -167,16 +168,31 @@ export default function Content() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.05 }}
                   whileHover={{ y: -4 }}
-                  className="bg-background border rounded-xl p-6 hover-elevate"
+                  className="bg-background border rounded-xl overflow-hidden hover-elevate"
                   data-testid={`link-post-${index}`}
                 >
-                  <span className="text-xs text-muted-foreground" data-testid={`text-post-date-${index}`}>{formatDate(post.pubDate)}</span>
-                  <h3 className="font-bold text-lg mt-2 mb-3 line-clamp-2" data-testid={`text-post-title-${index}`}>
-                    {post.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground line-clamp-3" data-testid={`text-post-excerpt-${index}`}>{post.excerpt}</p>
-                  <div className="flex items-center gap-2 mt-4 text-accent text-sm font-medium" data-testid={`text-post-readmore-${index}`}>
-                    Read more <ExternalLink className="w-3 h-3" />
+                  {post.image && (
+                    <div className="aspect-video w-full overflow-hidden bg-secondary">
+                      <img 
+                        src={post.image} 
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                        data-testid={`img-post-${index}`}
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                  )}
+                  <div className="p-6">
+                    <span className="text-xs text-muted-foreground" data-testid={`text-post-date-${index}`}>{formatDate(post.pubDate)}</span>
+                    <h3 className="font-bold text-lg mt-2 mb-3 line-clamp-2" data-testid={`text-post-title-${index}`}>
+                      {post.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground line-clamp-3" data-testid={`text-post-excerpt-${index}`}>{post.excerpt}</p>
+                    <div className="flex items-center gap-2 mt-4 text-accent text-sm font-medium" data-testid={`text-post-readmore-${index}`}>
+                      Read more <ExternalLink className="w-3 h-3" />
+                    </div>
                   </div>
                 </motion.a>
               ))}
