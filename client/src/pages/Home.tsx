@@ -82,7 +82,7 @@ export default function Home() {
               {
                 icon: <Users className="w-8 h-8 text-primary" />,
                 title: "Community & Impact",
-                desc: "I find real joy in learning about people and connecting thoughtful individuals whenever I can.",
+                desc: "I find meaning and joy in learning about people and connecting good people",
                 link: "#contact"
               }
             ].map((item, i) => (
