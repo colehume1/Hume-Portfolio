@@ -6,10 +6,6 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="text-center md:text-left">
           <h3 className="font-display text-2xl font-bold mb-2">Cole Hume</h3>
-          <p className="text-primary-foreground/70 max-w-2xl">
-            I hope to have a loving impact through building businesses, sharing what I learn,<br />
-            and investing in community.
-          </p>
         </div>
 
         <div className="flex gap-6">
