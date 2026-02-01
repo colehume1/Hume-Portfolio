@@ -146,9 +146,6 @@ export default function About() {
               </p>
               <p>Alongside my work as a consultant at Boston Consulting Group (BCG), I spend a lot of time thinking about how technology shapes human decision-making and how responsibility fits as systems become more powerful. In 2022, as concerns around AI safety and misuse grew more urgent, I helped re-found the AI Robotics Ethics Society (AIRES) at UCLA. </p>
               <p>I am a generalist, an engineer's business guy, and drawn to work that rewards initiative, a dose of EQ, and intellectual rigor.</p>
-              <p>
-                Across these experiences, I am most drawn to work that rewards clarity of thought, intellectual honesty, and long-term responsibility, especially where technology, business, and human values intersect.
-              </p>
             </div>
           </motion.section>
 
