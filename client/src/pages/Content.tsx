@@ -15,7 +15,7 @@ interface PostsResponse {
   error?: string;
 }
 
-const POSTS_TO_SHOW = 8;
+const DEFAULT_POSTS_TO_SHOW = 8;
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -26,12 +26,18 @@ function formatDate(dateString: string): string {
   });
 }
 
-export default function Content() {
+interface ContentProps {
+  maxPosts?: number;
+}
+
+export default function Content({ maxPosts }: ContentProps) {
+  const postsToShow = maxPosts ?? DEFAULT_POSTS_TO_SHOW;
+  
   const { data, isLoading, error } = useQuery<PostsResponse>({
     queryKey: ['/api/posts'],
   });
 
-  const posts = data?.posts?.slice(0, POSTS_TO_SHOW) || [];
+  const posts = data?.posts?.slice(0, postsToShow) || [];
 
   return (
     <div className="pb-20">

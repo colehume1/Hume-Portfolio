@@ -64,11 +64,11 @@ export default function Home() {
       </section>
 
       {/* Single Page Sections */}
+      <div id="content">
+        <Content maxPosts={4} />
+      </div>
       <div id="about">
         <About />
-      </div>
-      <div id="content">
-        <Content />
       </div>
       <div id="contact">
         <Contact />
