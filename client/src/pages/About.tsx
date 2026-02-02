@@ -35,11 +35,13 @@ export default function About() {
                 className="group relative overflow-hidden rounded-lg shadow-sm cursor-pointer"
                 onClick={() => setVisibleCaption(visibleCaption === 0 ? null : 0)}
               >
-                <img
-                  src={dogPhoto}
-                  alt="Cole with dog"
-                  className="w-full h-64 object-cover"
-                />
+                <div className="h-56 w-full overflow-hidden">
+                  <img
+                    src={dogPhoto}
+                    alt="Cole with dog"
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
                 <motion.div
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
@@ -66,11 +68,13 @@ export default function About() {
                 className="group relative overflow-hidden rounded-lg shadow-sm cursor-pointer"
                 onClick={() => setVisibleCaption(visibleCaption === 1 ? null : 1)}
               >
-                <img
-                  src={runningPhoto}
-                  alt="Cole running"
-                  className="w-full h-64 object-cover object-top"
-                />
+                <div className="h-56 w-full overflow-hidden">
+                  <img
+                    src={runningPhoto}
+                    alt="Cole running"
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
                 <motion.div
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
@@ -99,11 +103,13 @@ export default function About() {
                 transition={{ duration: 0.3 }}
                 className="group relative overflow-hidden rounded-lg shadow-sm cursor-pointer block"
               >
-                <img
-                  src={guitarPhoto}
-                  alt="Cole playing guitar"
-                  className="w-full h-80 object-cover object-[center_10%]"
-                />
+                <div className="h-56 w-full overflow-hidden">
+                  <img
+                    src={guitarPhoto}
+                    alt="Cole playing guitar"
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
                 <motion.div
                   initial={{ opacity: 0 }}
                   whileHover={{ opacity: 1 }}
