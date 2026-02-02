@@ -102,7 +102,7 @@ export default function About() {
                 <img
                   src={guitarPhoto}
                   alt="Cole playing guitar"
-                  className="w-full h-80 object-cover object-top"
+                  className="w-full h-80 object-cover object-[center_10%]"
                 />
                 <motion.div
                   initial={{ opacity: 0 }}
