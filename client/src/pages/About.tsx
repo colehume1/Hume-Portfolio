@@ -72,7 +72,7 @@ export default function About() {
                   <img
                     src={runningPhoto}
                     alt="Cole running"
-                    className="h-full w-full object-cover object-center"
+                    className="h-full w-full object-cover object-top"
                   />
                 </div>
                 <motion.div
