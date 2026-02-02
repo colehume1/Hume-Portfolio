@@ -116,7 +116,7 @@ export default function Contact() {
                 {...form.register("message")}
                 rows={5}
                 className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none"
-                placeholder="How can we work together?"
+                placeholder="literally anything goes here. Give needed feedback on content, set up a chat, or share a topic for me to cover"
               />
               {form.formState.errors.message && (
                 <p className="text-sm text-destructive">{form.formState.errors.message.message}</p>
