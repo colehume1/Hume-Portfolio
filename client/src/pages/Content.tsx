@@ -65,12 +65,12 @@ export default function Content({ maxPosts }: ContentProps) {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -4 }}
-              className="group bg-background border rounded-xl p-8 text-center hover:border-primary/50 transition-colors"
+              className="group bg-background border rounded-xl p-5 text-center hover:border-primary/50 transition-colors"
             >
-              <Youtube className="w-10 h-10 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
-              <h3 className="font-bold text-lg mb-2">Video Essays & Conversations</h3>
+              <Youtube className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <h3 className="font-bold text-base mb-1">Video Essays & Conversations</h3>
               <p className="text-sm text-muted-foreground">Long-form explorations on YouTube</p>
-              <div className="flex items-center justify-center gap-2 mt-4 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="flex items-center justify-center gap-2 mt-3 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                 Watch <ExternalLink className="w-3 h-3" />
               </div>
             </motion.a>
@@ -81,12 +81,12 @@ export default function Content({ maxPosts }: ContentProps) {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -4 }}
-              className="group bg-background border rounded-xl p-8 text-center hover:border-primary/50 transition-colors"
+              className="group bg-background border rounded-xl p-5 text-center hover:border-primary/50 transition-colors"
             >
-              <Newspaper className="w-10 h-10 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
-              <h3 className="font-bold text-lg mb-2">Writing & Newsletter</h3>
+              <Newspaper className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <h3 className="font-bold text-base mb-1">Writing & Newsletter</h3>
               <p className="text-sm text-muted-foreground">Weekly insights on Substack</p>
-              <div className="flex items-center justify-center gap-2 mt-4 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="flex items-center justify-center gap-2 mt-3 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                 Read <ExternalLink className="w-3 h-3" />
               </div>
             </motion.a>
@@ -97,12 +97,12 @@ export default function Content({ maxPosts }: ContentProps) {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ y: -4 }}
-              className="group bg-background border rounded-xl p-8 text-center hover:border-primary/50 transition-colors"
+              className="group bg-background border rounded-xl p-5 text-center hover:border-primary/50 transition-colors"
             >
-              <Mic className="w-10 h-10 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
-              <h3 className="font-bold text-lg mb-2">Podcast</h3>
+              <Mic className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
+              <h3 className="font-bold text-base mb-1">Podcast</h3>
               <p className="text-sm text-muted-foreground">Deep-dive conversations</p>
-              <div className="flex items-center justify-center gap-2 mt-4 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="flex items-center justify-center gap-2 mt-3 text-accent text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                 Listen <ExternalLink className="w-3 h-3" />
               </div>
             </motion.a>
