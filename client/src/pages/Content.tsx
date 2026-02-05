@@ -47,8 +47,8 @@ export default function Content({ maxPosts }: ContentProps) {
           animate={{ opacity: 1, y: 0 }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h1 className="text-4xl md:text-6xl font-display font-bold mb-6">Navigating the Chaotic, Wonderful 20s</h1>
-          <p className="text-xl text-muted-foreground leading-relaxed">Young, Smart, & Battling Broke is a media platform for curious and intentional young people figuring out work, money, and meaning</p>
+          <h1 className="md:text-6xl font-display font-bold mb-6 text-[51px]">Young, Smart, & Battling Broke</h1>
+          <p className="text-xl text-muted-foreground leading-relaxed">A media platform spotlighting honest mentors and professional insights for curious, intentional young people figuring out work, money, and meaning</p>
         </motion.div>
 
         {/* Content Hub Section */}

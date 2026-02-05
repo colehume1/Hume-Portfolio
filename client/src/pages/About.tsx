@@ -142,10 +142,10 @@ export default function About() {
             </div>
             <div className="space-y-6 text-sm text-muted-foreground leading-[1.65]">
               <p>
-                During college, I lost my ability to read for several months due to a rare form of epilepsy, with an initial prognosis that it might be permanent. That period clarified something important for me: meaning is not derived from mere skill or labor, but from the ability to have a real, <a href="#loving-impact" className="text-accent hover:underline">loving impact</a>. When my reading ability returned after finding a medication with unusually high efficacy for me, it became equally clear that thoughtful communication and careful thinking around complex problems are the ways I can do the most good.
+                During college, I lost my ability to read and write for several months due to a rare form of epilepsy, with an initial prognosis that it might be permanent. That period clarified something important for me: meaning is not derived from mere skill or a singular identity but from the ability to have a real, <a href="#loving-impact" className="text-accent hover:underline">loving impact</a>. When my reading ability returned after finding a medication with unusually high efficacy for me, it became equally clear that thoughtful communication and consideration of complex problems are the ways I can do the most good.
               </p>
-              <p>Alongside my work as a consultant at Boston Consulting Group (BCG), I spend a lot of time thinking about how technology shapes human decision-making and how responsibility fits as systems become more powerful. In 2022, as concerns around AI safety and misuse grew more urgent, I helped re-found the AI Robotics Ethics Society (AIRES) at UCLA. </p>
-              <p>I am a generalist, an engineer's business guy, and drawn to work that rewards initiative, a dose of EQ, and intellectual rigor.</p>
+              <p>Alongside my work as a consultant at Boston Consulting Group (BCG), I spend a lot of time thinking about how we shape our technology and how our tech shapes us. In 2022, as optimism and concerns around AI became more relevant than ever, I helped re-found the AI Robotics Ethics Society (AIRES) at UCLA. </p>
+              <p>I am a generalist, an engineer's business guy, a first principles and systems thinker, and drawn to work that rewards initiative, a dose of EQ, and intellectual curiosity.</p>
             </div>
           </motion.section>
 
@@ -161,10 +161,10 @@ export default function About() {
               <span className="text-accent text-2xl">✦</span> A Loving Impact
             </h3>
             <p className="text-muted-foreground mb-4">
-              I'll be the first to admit this is hard to operationalize. You can't spreadsheet "love" and it doesn't map cleanly to outcomes or titles. But across every health scare, career decision, and personal reset, my sense of meaning keeps resolving to the same place.
+              I'll be the first to admit this is hard to operationalize. But across every health obstacle, professional decision, and personal reset, my sense of meaning keeps resolving to the same place.
             </p>
             <p className="text-muted-foreground">
-              If I can help a few people say "I love" a little more often, I'll consider my life well spent. That might mean loving the spaces we inhabit, the communities we build, or the technologies and systems we choose to bring into the world.
+              If I can help a few people say "I love" a little more often, I'll consider my life well spent. That might mean helping others love the spaces we inhabit, the communities we build, the technologies we choose to bring into the world, or ourselves.
             </p>
           </motion.section>
         </div>
