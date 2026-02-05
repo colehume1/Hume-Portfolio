@@ -32,7 +32,7 @@ export default function Home() {
               Cole Hume
             </motion.h1>
             <motion.p variants={fadeIn} className="text-lg md:text-xl text-muted-foreground font-light mb-6 max-w-lg">
-              live for big ideas, small inputs, & good people
+              Love big ideas, small inputs, & good people
             </motion.p>
             
             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
