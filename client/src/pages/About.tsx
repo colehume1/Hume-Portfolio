@@ -103,11 +103,11 @@ export default function About() {
                 transition={{ duration: 0.3 }}
                 className="group relative overflow-hidden rounded-lg shadow-sm cursor-pointer block"
               >
-                <div className="h-56 w-full overflow-hidden">
+                <div className="h-56 w-full overflow-hidden flex items-center justify-center bg-secondary">
                   <img
                     src={guitarPhoto}
                     alt="Cole playing guitar"
-                    className="h-full w-full object-cover object-center"
+                    className="h-full w-full object-cover object-center scale-[0.85]"
                   />
                 </div>
                 <motion.div
