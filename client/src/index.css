@@ -82,3 +82,11 @@ html {
 ::selection {
   @apply bg-primary/20 text-primary;
 }
+
+/* Custom Turtle Cursor - Desktop only */
+@media (hover: hover) and (pointer: fine) {
+  .turtle-cursor-active,
+  .turtle-cursor-active * {
+    cursor: none !important;
+  }
+}

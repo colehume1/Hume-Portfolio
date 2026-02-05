@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { TurtleCursor } from "@/components/TurtleCursor";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Content from "@/pages/Content";
@@ -24,6 +25,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <TurtleCursor />
         <div className="min-h-screen flex flex-col font-body bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary">
           <Navigation />
           <main className="flex-grow">

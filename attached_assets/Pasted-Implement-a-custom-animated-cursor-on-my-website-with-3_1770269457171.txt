@@ -1,0 +1,60 @@
+Implement a custom animated cursor on my website with 3 speed states, without changing any unrelated layout/styles/components.
+
+GOAL
+Create a turtle cursor that changes by mouse speed:
+1) idle (not moving): happy turtle
+2) slow movement: wide-eyed turtle
+3) fast movement: headband + sweat turtle
+
+CONSTRAINTS
+- Do NOT modify existing page structure or design except what is required for cursor feature.
+- Add this as an isolated feature in its own files if possible.
+- Desktop only (fine pointer + hover). Disable entirely on touch devices.
+- Preserve all existing interactions/clicks (cursor must not block pointer events).
+- Respect accessibility and performance.
+
+ASSET PATHS
+Use these image paths (I will add PNGs here):
+- /assets/cursor/turtle-happy.png
+- /assets/cursor/turtle-wide-eyed.png
+- /assets/cursor/turtle-headband-sweat.png
+
+IMPLEMENTATION REQUIREMENTS
+1) Add a single fixed cursor element injected once:
+   - id: turtle-cursor
+   - pointer-events: none
+   - very high z-index
+2) Hide default cursor ONLY on desktop fine pointers:
+   - media query: (hover: hover) and (pointer: fine)
+3) Track mouse position and compute speed in px/sec:
+   - speed = distance(delta x/y) / delta time
+4) State logic:
+   - idle if no movement for ~140ms
+   - slow for moving speeds below fast threshold
+   - fast for speeds above fast threshold
+   Suggested thresholds (tunable constants):
+   - FAST_MIN = 700 px/s
+   - IDLE_MS = 140
+5) Apply state by swapping background-image on #turtle-cursor.
+6) Add mild visual polish:
+   - optional tiny scale-up on fast state
+   - smooth transform updates
+7) Preload all 3 cursor images to avoid flicker.
+8) Fail-safe:
+   - if any cursor image fails to load, revert to default system cursor and disable custom cursor logic cleanly.
+9) Cleanup:
+   - avoid multiple listeners if component re-mounts (important for React/SPA).
+10) Keep code in one isolated module/component:
+   - React/Next: create `TurtleCursor` component and mount once in root layout.
+   - Vanilla: create `/js/turtle-cursor.js` and include once globally.
+
+DELIVERABLES
+- Implemented feature
+- Short summary of files changed
+- Constants grouped at top for easy tuning:
+  - FAST_MIN
+  - IDLE_MS
+  - CURSOR_SIZE (default 42)
+
+ACCEPTANCE TESTS (please run mentally and confirm)
+- On desktop, cursor changes states correctly.
