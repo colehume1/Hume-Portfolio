@@ -6,11 +6,10 @@ const CURSOR_SIZE = 42;
 
 const STATE_IMAGES = {
   idle: "/assets/cursor/turtle-happy.png",
-  slow: "/assets/cursor/turtle-wide-eyed.png",
-  fast: "/assets/cursor/turtle-headband-sweat.png",
+  moving: "/assets/cursor/turtle-headband-sweat.png",
 };
 
-type CursorState = "idle" | "slow" | "fast";
+type CursorState = "idle" | "moving";
 
 function preloadImages(urls: string[]): Promise<boolean[]> {
   return Promise.all(
@@ -74,10 +73,8 @@ export function TurtleCursor() {
         const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         const speed = (distance / deltaTime) * 1000;
 
-        if (speed >= FAST_MIN) {
-          setCursorState("fast");
-        } else if (speed > 0) {
-          setCursorState("slow");
+        if (speed > 0) {
+          setCursorState("moving");
         }
 
         if (idleTimeoutRef.current) {
@@ -131,7 +128,7 @@ export function TurtleCursor() {
         backgroundPosition: "center",
         pointerEvents: "none",
         zIndex: 99999,
-        transform: cursorState === "fast" ? "scale(1.1)" : "scale(1)",
+        transform: cursorState === "moving" ? "scale(1.1)" : "scale(1)",
         transition: "transform 0.1s ease-out",
         willChange: "left, top, transform",
       }}
