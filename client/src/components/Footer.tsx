@@ -36,6 +36,31 @@ export function Footer() {
           </a>
         </div>
       </div>
+
+      {/* Newsletter Signup */}
+      <div className="max-w-7xl mx-auto px-6 mt-4">
+        <div className="w-full max-w-[420px] mx-auto md:mx-0">
+          <h4 className="text-sm font-semibold mb-2">Newsletter</h4>
+          {/* TODO: Paste your Substack embed code here to replace the fallback */}
+          <div className="flex flex-col sm:flex-row gap-2">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="h-10 flex-1 rounded-[10px] px-3 bg-white/10 border border-white/20 text-primary-foreground placeholder:text-primary-foreground/50 text-sm focus:outline-none focus:border-white/40"
+              data-testid="input-newsletter-email"
+            />
+            <a
+              href="https://substack.com/@colehume?utm_source=website_footer"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="h-10 px-3.5 rounded-[10px] bg-white/20 hover:bg-white/30 transition-colors text-sm font-medium flex items-center justify-center"
+              data-testid="button-newsletter-subscribe"
+            >
+              Subscribe on Substack
+            </a>
+          </div>
+        </div>
+      </div>
       <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/10 text-center md:text-left text-sm text-primary-foreground/40">
         © {new Date().getFullYear()} Cole Hume. All rights reserved.
       </div>
