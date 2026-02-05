@@ -4,13 +4,13 @@ const FAST_MIN = 700;
 const IDLE_MS = 140;
 const CURSOR_SIZE = 42;
 
-const CURSOR_IMAGES = {
-  happy: "/assets/cursor/turtle-happy.png",
-  wideEyed: "/assets/cursor/turtle-wide-eyed.png",
-  headbandSweat: "/assets/cursor/turtle-headband-sweat.png",
+const STATE_IMAGES = {
+  idle: "/assets/cursor/turtle-happy.png",
+  slow: "/assets/cursor/turtle-wide-eyed.png",
+  fast: "/assets/cursor/turtle-headband-sweat.png",
 };
 
-type CursorState = "happy" | "wideEyed" | "headbandSweat";
+type CursorState = "idle" | "slow" | "fast";
 
 function preloadImages(urls: string[]): Promise<boolean[]> {
   return Promise.all(
@@ -36,7 +36,7 @@ function isDesktopWithFinePointer(): boolean {
 
 export function TurtleCursor() {
   const [enabled, setEnabled] = useState(false);
-  const [cursorState, setCursorState] = useState<CursorState>("happy");
+  const [cursorState, setCursorState] = useState<CursorState>("idle");
   const [position, setPosition] = useState({ x: -100, y: -100 });
 
   const lastPositionRef = useRef({ x: 0, y: 0 });
@@ -49,7 +49,7 @@ export function TurtleCursor() {
       return;
     }
 
-    preloadImages(Object.values(CURSOR_IMAGES)).then((results) => {
+    preloadImages(Object.values(STATE_IMAGES)).then((results) => {
       if (results.every((loaded) => loaded)) {
         setEnabled(true);
         document.documentElement.classList.add("turtle-cursor-active");
@@ -75,16 +75,16 @@ export function TurtleCursor() {
         const speed = (distance / deltaTime) * 1000;
 
         if (speed >= FAST_MIN) {
-          setCursorState("headbandSweat");
+          setCursorState("fast");
         } else if (speed > 0) {
-          setCursorState("wideEyed");
+          setCursorState("slow");
         }
 
         if (idleTimeoutRef.current) {
           clearTimeout(idleTimeoutRef.current);
         }
         idleTimeoutRef.current = window.setTimeout(() => {
-          setCursorState("happy");
+          setCursorState("idle");
         }, IDLE_MS);
       }
 
@@ -116,13 +116,6 @@ export function TurtleCursor() {
     return null;
   }
 
-  const imageSrc =
-    cursorState === "happy"
-      ? CURSOR_IMAGES.happy
-      : cursorState === "wideEyed"
-        ? CURSOR_IMAGES.wideEyed
-        : CURSOR_IMAGES.headbandSweat;
-
   return (
     <div
       id="turtle-cursor"
@@ -132,13 +125,13 @@ export function TurtleCursor() {
         top: position.y - CURSOR_SIZE / 2,
         width: CURSOR_SIZE,
         height: CURSOR_SIZE,
-        backgroundImage: `url(${imageSrc})`,
+        backgroundImage: `url(${STATE_IMAGES[cursorState]})`,
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         pointerEvents: "none",
         zIndex: 99999,
-        transform: cursorState === "headbandSweat" ? "scale(1.1)" : "scale(1)",
+        transform: cursorState === "fast" ? "scale(1.1)" : "scale(1)",
         transition: "transform 0.1s ease-out",
         willChange: "left, top, transform",
       }}
