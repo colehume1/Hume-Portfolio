@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Gamepad2 } from "lucide-react";
 import { Link } from "wouter";
 import About from "./About";
 import Content from "./Content";
@@ -70,6 +70,22 @@ export default function Home() {
       <div id="about">
         <About />
       </div>
+      {/* Turtle Jump Teaser */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="py-12 px-6"
+      >
+        <Link href="/turtle-jump" className="block max-w-md mx-auto text-center group" data-testid="link-turtle-jump-teaser">
+          <div className="flex items-center justify-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors">
+            <Gamepad2 className="w-4 h-4" />
+            <span className="text-sm font-medium">Bored? Try Turtle Jump</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </div>
+        </Link>
+      </motion.section>
+
       <div id="contact">
         <Contact />
       </div>

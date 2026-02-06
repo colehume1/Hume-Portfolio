@@ -10,12 +10,14 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Content from "@/pages/Content";
 import Contact from "@/pages/Contact";
+import TurtleJump from "@/pages/TurtleJump";
 import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/turtle-jump" component={TurtleJump} />
       <Route component={NotFound} />
     </Switch>
   );

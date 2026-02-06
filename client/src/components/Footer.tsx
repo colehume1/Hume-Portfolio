@@ -1,4 +1,5 @@
-import { Linkedin, Mail, Music, Podcast } from "lucide-react";
+import { Linkedin, Mail, Podcast } from "lucide-react";
+import { Link } from "wouter";
 
 export function Footer() {
   return (
@@ -61,8 +62,11 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/10 text-center md:text-left text-sm text-primary-foreground/40">
-        © {new Date().getFullYear()} Cole Hume. All rights reserved.
+      <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4 text-sm text-primary-foreground/40">
+        <span>© {new Date().getFullYear()} Cole Hume. All rights reserved.</span>
+        <Link href="/turtle-jump" className="hover:text-primary-foreground/70 transition-colors" data-testid="link-turtle-jump">
+          Turtle Jump
+        </Link>
       </div>
     </footer>
   );
