@@ -6,8 +6,8 @@ const CANVAS_WIDTH = 640;
 const CANVAS_HEIGHT = 280;
 const GROUND_Y = CANVAS_HEIGHT - 40;
 const TURTLE_SIZE = 36;
-const LOG_WIDTH = 36;
-const LOG_HEIGHT = 28;
+const LOG_WIDTH = 40;
+const LOG_HEIGHT = 26;
 const GRAVITY = 0.35;
 const JUMP_VELOCITY = -9.5;
 const GAME_SPEED = 1.6;
@@ -15,6 +15,7 @@ const OBSTACLE_MIN_GAP = 260;
 const OBSTACLE_MAX_GAP = 440;
 const WATER_SCORE = 100;
 const WATER_GRAVITY = 0.25;
+const SCORE_PER_SECOND = 5;
 
 interface Obstacle {
   x: number;
@@ -29,6 +30,7 @@ interface GameState {
   obstacles: Obstacle[];
   nextObstacleIn: number;
   score: number;
+  scoreAccum: number;
   speed: number;
   phase: "start" | "playing" | "over";
   underwater: boolean;
@@ -70,6 +72,7 @@ function createInitialState(): GameState {
     obstacles: [],
     nextObstacleIn: 260,
     score: 0,
+    scoreAccum: 0,
     speed: GAME_SPEED,
     phase: "start",
     underwater: false,
@@ -83,7 +86,6 @@ export default function TurtleJump() {
   const animFrameRef = useRef(0);
   const turtleImgRef = useRef<HTMLImageElement | null>(null);
   const overlayElRef = useRef<HTMLDivElement>(null);
-  const quoteElRef = useRef<HTMLDivElement>(null);
 
   const jump = useCallback(() => {
     const gs = gsRef.current;
@@ -91,7 +93,6 @@ export default function TurtleJump() {
       gsRef.current = createInitialState();
       gsRef.current.phase = "playing";
       if (overlayElRef.current) overlayElRef.current.style.display = "none";
-      if (quoteElRef.current) quoteElRef.current.style.display = "none";
       return;
     }
     if (!gs.isJumping) {
@@ -170,47 +171,81 @@ export default function TurtleJump() {
       const ly = GROUND_Y - obs.height;
       const lw = obs.width;
       const lh = obs.height;
-      const r = lh / 2;
+      const cr = 3;
+      const endRx = 5;
+      const endRy = lh / 2 - 1;
+      const cx = lx + lw;
+      const cy = ly + lh / 2;
 
-      ctx.fillStyle = underwater ? "#5a7a6a" : "#8B6F47";
+      ctx.fillStyle = underwater ? "rgba(70,100,90,0.2)" : "rgba(80,60,30,0.15)";
       ctx.beginPath();
-      ctx.moveTo(lx, ly + r);
-      ctx.lineTo(lx, ly + lh - r);
-      ctx.arcTo(lx, ly + lh, lx + r, ly + lh, r);
-      ctx.lineTo(lx + lw - r, ly + lh);
-      ctx.arcTo(lx + lw, ly + lh, lx + lw, ly + lh - r, r);
-      ctx.lineTo(lx + lw, ly + r);
-      ctx.arcTo(lx + lw, ly, lx + lw - r, ly, r);
-      ctx.lineTo(lx + r, ly);
-      ctx.arcTo(lx, ly, lx, ly + r, r);
+      ctx.ellipse(lx + lw / 2, GROUND_Y + 2, lw / 2 + 2, 3, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      const barkMain = underwater ? "#5a7a6a" : "#8B6914";
+      const barkDark = underwater ? "#4a6a5a" : "#6B5010";
+      const barkHighlight = underwater ? "#6a8a7a" : "#a08530";
+      const barkGrain = underwater ? "#507060" : "#7a5c12";
+
+      ctx.fillStyle = barkMain;
+      ctx.beginPath();
+      ctx.moveTo(lx + cr, ly);
+      ctx.lineTo(lx + lw, ly);
+      ctx.lineTo(lx + lw, ly + lh);
+      ctx.lineTo(lx + cr, ly + lh);
+      ctx.arcTo(lx, ly + lh, lx, ly + lh - cr, cr);
+      ctx.lineTo(lx, ly + cr);
+      ctx.arcTo(lx, ly, lx + cr, ly, cr);
       ctx.closePath();
       ctx.fill();
 
-      ctx.strokeStyle = underwater ? "#4a6a5a" : "#6B5233";
+      ctx.strokeStyle = barkDark;
       ctx.lineWidth = 1;
       ctx.stroke();
 
-      ctx.strokeStyle = underwater ? "#6a8a7a" : "#a08060";
-      ctx.lineWidth = 0.8;
-      const ringCount = Math.max(1, Math.floor(lw / 14));
-      for (let i = 1; i <= ringCount; i++) {
-        const rx = lx + (lw / (ringCount + 1)) * i;
+      ctx.strokeStyle = barkHighlight;
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(lx + 1, ly + 1);
+      ctx.lineTo(lx + lw - 1, ly + 1);
+      ctx.stroke();
+
+      ctx.strokeStyle = barkGrain;
+      ctx.lineWidth = 0.6;
+      const grainLines = 3;
+      for (let i = 1; i <= grainLines; i++) {
+        const gy = ly + (lh / (grainLines + 1)) * i;
         ctx.beginPath();
-        ctx.moveTo(rx, ly + 3);
-        ctx.lineTo(rx, ly + lh - 3);
+        ctx.moveTo(lx + 2, gy);
+        ctx.lineTo(lx + lw - 1, gy);
         ctx.stroke();
       }
 
-      ctx.fillStyle = underwater ? "#4a6a5a" : "#7a5f3a";
+      const endFill = underwater ? "#4f6f5f" : "#7a5c14";
+      const endStroke = underwater ? "#3a5a4a" : "#5a4510";
+      const ringColor = underwater ? "#5a7a6a" : "#8B6914";
+      const centerDot = underwater ? "#3a5a4a" : "#5a4510";
+
+      ctx.fillStyle = endFill;
       ctx.beginPath();
-      ctx.ellipse(lx + lw, ly + lh / 2, 3, lh / 2 - 1, 0, 0, Math.PI * 2);
+      ctx.ellipse(cx, cy, endRx, endRy, 0, 0, Math.PI * 2);
       ctx.fill();
-      ctx.strokeStyle = underwater ? "#3a5a4a" : "#5a4528";
-      ctx.lineWidth = 0.6;
+      ctx.strokeStyle = endStroke;
+      ctx.lineWidth = 1;
       ctx.stroke();
-      ctx.fillStyle = underwater ? "#5a7a6a" : "#6B5233";
+
+      ctx.strokeStyle = ringColor;
+      ctx.lineWidth = 0.5;
       ctx.beginPath();
-      ctx.arc(lx + lw, ly + lh / 2, 2, 0, Math.PI * 2);
+      ctx.ellipse(cx, cy, endRx * 0.6, endRy * 0.6, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.ellipse(cx, cy, endRx * 0.3, endRy * 0.3, 0, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.fillStyle = centerDot;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 1.2, 0, Math.PI * 2);
       ctx.fill();
     };
 
@@ -222,21 +257,26 @@ export default function TurtleJump() {
       ctx.textAlign = "left";
     };
 
-    const showOverlay = (line1: string, line2: string, line3: string) => {
+    const showOverlay = (title: string, score: string, cta: string, quote?: { text: string; author: string }) => {
       if (!overlayElRef.current) return;
       overlayElRef.current.style.display = "flex";
       const children = overlayElRef.current.children;
-      if (children[0]) children[0].textContent = line1;
-      if (children[1]) children[1].textContent = line2;
-      if (children[2]) children[2].textContent = line3;
-    };
-
-    const showQuote = (quote: { text: string; author: string }) => {
-      if (!quoteElRef.current) return;
-      quoteElRef.current.style.display = "block";
-      const children = quoteElRef.current.children;
-      if (children[0]) children[0].textContent = `"${quote.text}"`;
-      if (children[1]) children[1].textContent = `\u2014 ${quote.author}`;
+      if (children[0]) children[0].textContent = title;
+      if (children[1]) children[1].textContent = score;
+      const quoteEl = children[2] as HTMLElement;
+      const authorEl = children[3] as HTMLElement;
+      if (quote) {
+        quoteEl.textContent = `"${quote.text}"`;
+        quoteEl.style.display = "block";
+        authorEl.textContent = `\u2014 ${quote.author}`;
+        authorEl.style.display = "block";
+      } else {
+        quoteEl.textContent = "";
+        quoteEl.style.display = "none";
+        authorEl.textContent = "";
+        authorEl.style.display = "none";
+      }
+      if (children[4]) children[4].textContent = cta;
     };
 
     showOverlay("Turtle Jump", "", "Press Space or Tap to start");
@@ -320,14 +360,14 @@ export default function TurtleJump() {
             "Even the log looked surprised.",
           ];
           const funnyLine = funnyLines[Math.floor(Math.random() * funnyLines.length)];
-          showOverlay(funnyLine, `Score: ${gs.score}`, "Press Space or Tap to restart");
-          showQuote(q);
+          showOverlay(funnyLine, `Score: ${gs.score}`, "Press Space or Tap to restart", q);
           animFrameRef.current = requestAnimationFrame(loop);
           return;
         }
       }
 
-      gs.score += Math.round(gs.speed * dt * 0.5);
+      gs.scoreAccum += SCORE_PER_SECOND * (dt * 16.667 / 1000);
+      gs.score = Math.floor(gs.scoreAccum);
       gs.speed = GAME_SPEED + gs.score * 0.0008;
 
       drawTurtle(gs.turtleY);
@@ -383,19 +423,13 @@ export default function TurtleJump() {
           />
           <div
             ref={overlayElRef}
-            className="absolute inset-0 flex flex-col items-center justify-center bg-[#f5f0e8]/85 pointer-events-none"
+            className="absolute inset-0 flex flex-col items-center justify-center bg-[#f5f0e8]/90 pointer-events-none px-4"
           >
-            <span className="text-[#444] font-bold text-xl font-body" data-testid="text-game-overlay-title"></span>
-            <span className="text-[#888] text-sm mt-1 font-body" data-testid="text-game-overlay-score"></span>
-            <span className="text-[#888] text-sm mt-3 font-body" data-testid="text-game-overlay-cta"></span>
-          </div>
-          <div
-            ref={quoteElRef}
-            className="absolute left-1/2 -translate-x-1/2 bottom-[22%] max-w-[85%] text-center pointer-events-none"
-            style={{ display: "none" }}
-          >
-            <p className="text-[#555] text-xs italic leading-relaxed font-body" data-testid="text-game-quote"></p>
-            <p className="text-[#999] text-[11px] mt-1 font-body" data-testid="text-game-quote-author"></p>
+            <span className="text-[#333] font-bold text-lg font-body" data-testid="text-game-overlay-title"></span>
+            <span className="text-[#666] text-sm mt-1 font-body" data-testid="text-game-overlay-score"></span>
+            <p className="text-[#1f2937] font-bold text-base md:text-lg italic leading-snug max-w-[90%] text-center mt-4 font-body" style={{ display: "none" }} data-testid="text-game-quote"></p>
+            <p className="text-[#4b5563] text-sm font-medium mt-1 font-body" style={{ display: "none" }} data-testid="text-game-quote-author"></p>
+            <span className="text-[#888] text-sm mt-4 font-body" data-testid="text-game-overlay-cta"></span>
           </div>
         </div>
 
