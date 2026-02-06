@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft } from "lucide-react";
 
@@ -6,21 +6,46 @@ const CANVAS_WIDTH = 640;
 const CANVAS_HEIGHT = 280;
 const GROUND_Y = CANVAS_HEIGHT - 40;
 const TURTLE_SIZE = 36;
-const LOG_WIDTH = 40;
-const LOG_HEIGHT = 26;
+
+const LOG_WIDTH_MIN = 28;
+const LOG_WIDTH_MAX = 55;
+const LOG_HEIGHT_BASE = 24;
+const LOG_HEIGHT_VAR = 10;
+
 const GRAVITY = 0.35;
 const JUMP_VELOCITY = -9.5;
 const GAME_SPEED = 1.6;
-const OBSTACLE_MIN_GAP = 260;
-const OBSTACLE_MAX_GAP = 440;
-const WATER_SCORE = 100;
+const OBSTACLE_MIN_GAP = 220;
+const OBSTACLE_MAX_GAP = 480;
 const WATER_GRAVITY = 0.25;
 const SCORE_PER_SECOND = 5;
+const MODE_INTERVAL = 200;
+
+const BIRD_WIDTH = 30;
+const BIRD_HEIGHT = 22;
+const BIRD_Y_MIN = 70;
+const BIRD_Y_MAX = 155;
+const BIRD_SPAWN_CHANCE = 0.28;
+
+const FISH_WIDTH = 32;
+const FISH_HEIGHT = 20;
+const FISH_Y_MIN = 75;
+const FISH_Y_MAX = 160;
+const FISH_SPAWN_CHANCE = 0.30;
+
+const BLOCK_DURATION = 500;
+const BLOCK_COOLDOWN = 1300;
+
+type ObstacleType = "log" | "bird" | "fish";
+type GameMode = "land" | "water";
 
 interface Obstacle {
   x: number;
   width: number;
   height: number;
+  type: ObstacleType;
+  y: number;
+  dead: boolean;
 }
 
 interface GameState {
@@ -33,8 +58,11 @@ interface GameState {
   scoreAccum: number;
   speed: number;
   phase: "start" | "playing" | "over";
-  underwater: boolean;
+  mode: GameMode;
   waterTransition: number;
+  blocking: boolean;
+  blockTimer: number;
+  blockCooldown: number;
 }
 
 const QUOTES = [
@@ -75,8 +103,11 @@ function createInitialState(): GameState {
     scoreAccum: 0,
     speed: GAME_SPEED,
     phase: "start",
-    underwater: false,
+    mode: "land",
     waterTransition: 0,
+    blocking: false,
+    blockTimer: 0,
+    blockCooldown: 0,
   };
 }
 
@@ -86,12 +117,15 @@ export default function TurtleJump() {
   const animFrameRef = useRef(0);
   const turtleImgRef = useRef<HTMLImageElement | null>(null);
   const overlayElRef = useRef<HTMLDivElement>(null);
+  const controlsElRef = useRef<HTMLParagraphElement>(null);
+  const [blockReady, setBlockReady] = useState(true);
 
   const jump = useCallback(() => {
     const gs = gsRef.current;
     if (gs.phase === "start" || gs.phase === "over") {
       gsRef.current = createInitialState();
       gsRef.current.phase = "playing";
+      setBlockReady(true);
       if (overlayElRef.current) overlayElRef.current.style.display = "none";
       return;
     }
@@ -99,6 +133,15 @@ export default function TurtleJump() {
       gs.velocityY = JUMP_VELOCITY;
       gs.isJumping = true;
     }
+  }, []);
+
+  const block = useCallback(() => {
+    const gs = gsRef.current;
+    if (gs.phase !== "playing") return;
+    if (gs.blocking || gs.blockCooldown > 0) return;
+    gs.blocking = true;
+    gs.blockTimer = BLOCK_DURATION;
+    setBlockReady(false);
   }, []);
 
   useEffect(() => {
@@ -155,20 +198,49 @@ export default function TurtleJump() {
       ctx.stroke();
     };
 
-    const drawTurtle = (y: number) => {
-      if (turtleImgRef.current) {
-        ctx.drawImage(turtleImgRef.current, 60, y, TURTLE_SIZE, TURTLE_SIZE);
+    const drawTurtle = (y: number, isBlocking: boolean) => {
+      const tx = 60;
+      if (isBlocking) {
+        ctx.fillStyle = "#5a8e3e";
+        ctx.beginPath();
+        ctx.ellipse(tx + TURTLE_SIZE / 2, y + TURTLE_SIZE / 2, TURTLE_SIZE / 2, TURTLE_SIZE / 2.2, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "#3d6b28";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = "#4a7e2e";
+        const sr = TURTLE_SIZE * 0.35;
+        ctx.beginPath();
+        ctx.ellipse(tx + TURTLE_SIZE / 2, y + TURTLE_SIZE / 2, sr, sr, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = "#3d6b28";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(tx + TURTLE_SIZE / 2 - sr * 0.5, y + TURTLE_SIZE / 2);
+        ctx.lineTo(tx + TURTLE_SIZE / 2 + sr * 0.5, y + TURTLE_SIZE / 2);
+        ctx.moveTo(tx + TURTLE_SIZE / 2, y + TURTLE_SIZE / 2 - sr * 0.5);
+        ctx.lineTo(tx + TURTLE_SIZE / 2, y + TURTLE_SIZE / 2 + sr * 0.5);
+        ctx.stroke();
+        ctx.globalAlpha = 0.3;
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.arc(tx + TURTLE_SIZE / 2, y + TURTLE_SIZE / 2, TURTLE_SIZE / 2 + 3, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+      } else if (turtleImgRef.current) {
+        ctx.drawImage(turtleImgRef.current, tx, y, TURTLE_SIZE, TURTLE_SIZE);
       } else {
         ctx.fillStyle = "#5a9e3e";
         ctx.beginPath();
-        ctx.ellipse(60 + TURTLE_SIZE / 2, y + TURTLE_SIZE / 2, TURTLE_SIZE / 2, TURTLE_SIZE / 2.5, 0, 0, Math.PI * 2);
+        ctx.ellipse(tx + TURTLE_SIZE / 2, y + TURTLE_SIZE / 2, TURTLE_SIZE / 2, TURTLE_SIZE / 2.5, 0, 0, Math.PI * 2);
         ctx.fill();
       }
     };
 
     const drawLog = (obs: Obstacle, underwater: boolean) => {
       const lx = obs.x;
-      const ly = GROUND_Y - obs.height;
+      const ly = obs.y;
       const lw = obs.width;
       const lh = obs.height;
       const cr = 3;
@@ -249,12 +321,125 @@ export default function TurtleJump() {
       ctx.fill();
     };
 
+    const drawBird = (obs: Obstacle) => {
+      const bx = obs.x + obs.width / 2;
+      const by = obs.y + obs.height / 2;
+      const wingPhase = Math.sin(performance.now() * 0.008 + obs.x) * 0.4;
+
+      ctx.fillStyle = "#555";
+      ctx.beginPath();
+      ctx.ellipse(bx, by, obs.width / 2, obs.height / 3, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#444";
+      ctx.beginPath();
+      ctx.moveTo(bx - 4, by);
+      ctx.quadraticCurveTo(bx - obs.width * 0.55, by - 14 + wingPhase * 10, bx - obs.width * 0.35, by - 8 + wingPhase * 6);
+      ctx.lineTo(bx - 2, by);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(bx + 4, by);
+      ctx.quadraticCurveTo(bx + obs.width * 0.55, by - 14 - wingPhase * 10, bx + obs.width * 0.35, by - 8 - wingPhase * 6);
+      ctx.lineTo(bx + 2, by);
+      ctx.fill();
+
+      ctx.fillStyle = "#333";
+      ctx.beginPath();
+      ctx.arc(bx - 5, by - 2, 2.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#c97";
+      ctx.beginPath();
+      ctx.moveTo(bx - obs.width / 2 - 3, by);
+      ctx.lineTo(bx - obs.width / 2, by - 2);
+      ctx.lineTo(bx - obs.width / 2, by + 2);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = "white";
+      ctx.beginPath();
+      ctx.arc(bx - 5, by - 2.5, 1, 0, Math.PI * 2);
+      ctx.fill();
+    };
+
+    const drawFish = (obs: Obstacle) => {
+      const fx = obs.x + obs.width / 2;
+      const fy = obs.y + obs.height / 2;
+      const wobble = Math.sin(performance.now() * 0.006 + obs.x) * 2;
+
+      ctx.fillStyle = "#3a8a9e";
+      ctx.beginPath();
+      ctx.ellipse(fx, fy + wobble, obs.width / 2, obs.height / 2.5, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = "#2a7a8e";
+      ctx.beginPath();
+      ctx.moveTo(fx + obs.width / 2 - 2, fy + wobble);
+      ctx.lineTo(fx + obs.width / 2 + 8, fy + wobble - 6);
+      ctx.lineTo(fx + obs.width / 2 + 8, fy + wobble + 6);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = "#4a9aae";
+      ctx.beginPath();
+      ctx.moveTo(fx, fy + wobble - obs.height / 3);
+      ctx.lineTo(fx + 3, fy + wobble - obs.height / 3 - 5);
+      ctx.lineTo(fx + 6, fy + wobble - obs.height / 3);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = "#1a3a44";
+      ctx.beginPath();
+      ctx.arc(fx - obs.width / 4, fy + wobble - 1, 2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "white";
+      ctx.beginPath();
+      ctx.arc(fx - obs.width / 4, fy + wobble - 1.5, 0.8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = "#3090a5";
+      ctx.lineWidth = 0.5;
+      for (let i = 0; i < 3; i++) {
+        const sx = fx - 2 + i * 5;
+        ctx.beginPath();
+        ctx.moveTo(sx, fy + wobble);
+        ctx.quadraticCurveTo(sx + 2, fy + wobble + 2, sx + 4, fy + wobble);
+        ctx.stroke();
+      }
+    };
+
     const drawScore = (s: number, underwater: boolean) => {
       ctx.fillStyle = underwater ? "#3a6070" : "#666";
       ctx.font = "14px Inter, sans-serif";
       ctx.textAlign = "right";
       ctx.fillText(`Score: ${s}`, CANVAS_WIDTH - 16, 28);
       ctx.textAlign = "left";
+    };
+
+    const drawBlockIndicator = (gs: GameState) => {
+      const ix = 16;
+      const iy = 20;
+      if (gs.blocking) {
+        ctx.fillStyle = gs.mode === "water" ? "#2a7a8e" : "#5a8e3e";
+        ctx.font = "bold 11px Inter, sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText("SHELL!", ix, iy);
+      } else if (gs.blockCooldown > 0) {
+        const pct = 1 - gs.blockCooldown / BLOCK_COOLDOWN;
+        ctx.fillStyle = "#bbb";
+        ctx.fillRect(ix, iy - 6, 40, 5);
+        ctx.fillStyle = gs.mode === "water" ? "#3a9aae" : "#6aae4e";
+        ctx.fillRect(ix, iy - 6, 40 * pct, 5);
+        ctx.strokeStyle = "#999";
+        ctx.lineWidth = 0.5;
+        ctx.strokeRect(ix, iy - 6, 40, 5);
+      } else {
+        ctx.fillStyle = gs.mode === "water" ? "#3a8a9e" : "#5a9e3e";
+        ctx.font = "10px Inter, sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText("[B] Block", ix, iy);
+      }
     };
 
     const showOverlay = (title: string, score: string, cta: string, quote?: { text: string; author: string }) => {
@@ -279,13 +464,25 @@ export default function TurtleJump() {
       if (children[4]) children[4].textContent = cta;
     };
 
+    const updateControlsHint = (mode: GameMode) => {
+      if (!controlsElRef.current) return;
+      if (mode === "water") {
+        controlsElRef.current.textContent = "Space/Tap to swim-jump \u00B7 B to shell-block fish";
+      } else {
+        controlsElRef.current.textContent = "Space/Tap to jump \u00B7 B to shell-block birds";
+      }
+    };
+
     showOverlay("Turtle Jump", "", "Press Space or Tap to start");
+    updateControlsHint("land");
 
     let lastTime = performance.now();
+    let prevMode: GameMode = "land";
 
     const loop = (time: number) => {
       const gs = gsRef.current;
-      const dt = Math.min((time - lastTime) / 16.667, 2);
+      const rawDt = time - lastTime;
+      const dt = Math.min(rawDt / 16.667, 2);
       lastTime = time;
 
       const waterT = gs.waterTransition;
@@ -293,27 +490,56 @@ export default function TurtleJump() {
       drawGround(waterT);
 
       if (gs.phase === "start") {
-        drawTurtle(GROUND_Y - TURTLE_SIZE);
+        drawTurtle(GROUND_Y - TURTLE_SIZE, false);
         animFrameRef.current = requestAnimationFrame(loop);
         return;
       }
 
       if (gs.phase === "over") {
-        drawTurtle(gs.turtleY);
-        for (const obs of gs.obstacles) drawLog(obs, gs.underwater);
-        drawScore(gs.score, gs.underwater);
+        drawTurtle(gs.turtleY, gs.blocking);
+        for (const obs of gs.obstacles) {
+          if (obs.dead) continue;
+          if (obs.type === "log") drawLog(obs, gs.mode === "water");
+          else if (obs.type === "bird") drawBird(obs);
+          else if (obs.type === "fish") drawFish(obs);
+        }
+        drawScore(gs.score, gs.mode === "water");
         animFrameRef.current = requestAnimationFrame(loop);
         return;
       }
 
-      if (gs.score >= WATER_SCORE && !gs.underwater) {
-        gs.underwater = true;
-      }
-      if (gs.underwater && gs.waterTransition < 1) {
-        gs.waterTransition = Math.min(1, gs.waterTransition + 0.008 * dt);
+      const targetMode: GameMode = (Math.floor(gs.score / MODE_INTERVAL) % 2 === 0) ? "land" : "water";
+      gs.mode = targetMode;
+
+      if (targetMode !== prevMode) {
+        updateControlsHint(targetMode);
+        prevMode = targetMode;
       }
 
-      const currentGravity = gs.underwater ? WATER_GRAVITY : GRAVITY;
+      const targetT = targetMode === "water" ? 1 : 0;
+      if (gs.waterTransition < targetT) {
+        gs.waterTransition = Math.min(targetT, gs.waterTransition + 0.012 * dt);
+      } else if (gs.waterTransition > targetT) {
+        gs.waterTransition = Math.max(targetT, gs.waterTransition - 0.012 * dt);
+      }
+
+      if (gs.blocking) {
+        gs.blockTimer -= rawDt;
+        if (gs.blockTimer <= 0) {
+          gs.blocking = false;
+          gs.blockTimer = 0;
+          gs.blockCooldown = BLOCK_COOLDOWN;
+        }
+      }
+      if (gs.blockCooldown > 0) {
+        gs.blockCooldown -= rawDt;
+        if (gs.blockCooldown <= 0) {
+          gs.blockCooldown = 0;
+          setBlockReady(true);
+        }
+      }
+
+      const currentGravity = gs.mode === "water" ? WATER_GRAVITY : GRAVITY;
       gs.velocityY += currentGravity * dt;
       gs.turtleY += gs.velocityY * dt;
 
@@ -325,17 +551,45 @@ export default function TurtleJump() {
 
       gs.nextObstacleIn -= gs.speed * dt;
       if (gs.nextObstacleIn <= 0) {
-        gs.obstacles.push({
-          x: CANVAS_WIDTH,
-          width: LOG_WIDTH,
-          height: LOG_HEIGHT + Math.random() * 8,
-        });
-        gs.nextObstacleIn = OBSTACLE_MIN_GAP + Math.random() * (OBSTACLE_MAX_GAP - OBSTACLE_MIN_GAP);
+        const isAerial = gs.mode === "land"
+          ? Math.random() < BIRD_SPAWN_CHANCE
+          : Math.random() < FISH_SPAWN_CHANCE;
+
+        if (isAerial) {
+          const aType = gs.mode === "land" ? "bird" : "fish";
+          const aW = aType === "bird" ? BIRD_WIDTH : FISH_WIDTH;
+          const aH = aType === "bird" ? BIRD_HEIGHT : FISH_HEIGHT;
+          const yMin = aType === "bird" ? BIRD_Y_MIN : FISH_Y_MIN;
+          const yMax = aType === "bird" ? BIRD_Y_MAX : FISH_Y_MAX;
+          gs.obstacles.push({
+            x: CANVAS_WIDTH,
+            width: aW,
+            height: aH,
+            type: aType,
+            y: yMin + Math.random() * (yMax - yMin),
+            dead: false,
+          });
+          gs.nextObstacleIn = OBSTACLE_MIN_GAP * 0.7 + Math.random() * (OBSTACLE_MAX_GAP - OBSTACLE_MIN_GAP) * 0.6;
+        } else {
+          const lw = LOG_WIDTH_MIN + Math.random() * (LOG_WIDTH_MAX - LOG_WIDTH_MIN);
+          const lh = LOG_HEIGHT_BASE + Math.random() * LOG_HEIGHT_VAR;
+          gs.obstacles.push({
+            x: CANVAS_WIDTH,
+            width: lw,
+            height: lh,
+            type: "log",
+            y: GROUND_Y - lh,
+            dead: false,
+          });
+          gs.nextObstacleIn = OBSTACLE_MIN_GAP + Math.random() * (OBSTACLE_MAX_GAP - OBSTACLE_MIN_GAP);
+        }
       }
 
       for (let i = gs.obstacles.length - 1; i >= 0; i--) {
-        gs.obstacles[i].x -= gs.speed * dt;
-        if (gs.obstacles[i].x + gs.obstacles[i].width < 0) {
+        const obs = gs.obstacles[i];
+        const spd = (obs.type === "bird" || obs.type === "fish") ? gs.speed * 1.15 : gs.speed;
+        obs.x -= spd * dt;
+        if (obs.x + obs.width + 10 < 0) {
           gs.obstacles.splice(i, 1);
         }
       }
@@ -346,19 +600,52 @@ export default function TurtleJump() {
       const turtleBottom = gs.turtleY + TURTLE_SIZE;
 
       for (const obs of gs.obstacles) {
-        const obsLeft = obs.x + 4;
-        const obsRight = obs.x + obs.width - 4;
-        const obsTop = GROUND_Y - obs.height;
+        if (obs.dead) continue;
 
-        if (turtleRight > obsLeft && turtleLeft < obsRight && turtleBottom > obsTop) {
+        let obsLeft: number, obsRight: number, obsTop: number, obsBottom: number;
+        if (obs.type === "log") {
+          obsLeft = obs.x + 4;
+          obsRight = obs.x + obs.width - 4;
+          obsTop = obs.y;
+          obsBottom = obs.y + obs.height;
+        } else {
+          obsLeft = obs.x + 3;
+          obsRight = obs.x + obs.width - 3;
+          obsTop = obs.y + 2;
+          obsBottom = obs.y + obs.height - 2;
+        }
+
+        if (turtleRight > obsLeft && turtleLeft < obsRight && turtleBottom > obsTop && turtleTop < obsBottom) {
+          if ((obs.type === "bird" || obs.type === "fish") && gs.blocking) {
+            obs.dead = true;
+            continue;
+          }
           gs.phase = "over";
+          gs.blocking = false;
+          gs.blockTimer = 0;
+          gs.blockCooldown = 0;
+          setBlockReady(true);
           const q = randomQuote();
-          const funnyLines = [
-            "You were outpaced by moss.",
-            "The log wins. Again.",
-            "Slow and steady... didn't finish.",
-            "Even the log looked surprised.",
-          ];
+          const funnyLines = obs.type === "log"
+            ? [
+                "You were outpaced by moss.",
+                "The log wins. Again.",
+                "Slow and steady... didn't finish.",
+                "Even the log looked surprised.",
+              ]
+            : obs.type === "bird"
+            ? [
+                "That bird had attitude.",
+                "Should've ducked. Or blocked.",
+                "Aerial assault, turtle down.",
+                "Wings beat shell today.",
+              ]
+            : [
+                "That fish meant business.",
+                "Fin slap. Game over.",
+                "The ocean is not your friend.",
+                "Shell-block next time.",
+              ];
           const funnyLine = funnyLines[Math.floor(Math.random() * funnyLines.length)];
           showOverlay(funnyLine, `Score: ${gs.score}`, "Press Space or Tap to restart", q);
           animFrameRef.current = requestAnimationFrame(loop);
@@ -370,9 +657,15 @@ export default function TurtleJump() {
       gs.score = Math.floor(gs.scoreAccum);
       gs.speed = GAME_SPEED + gs.score * 0.0008;
 
-      drawTurtle(gs.turtleY);
-      for (const obs of gs.obstacles) drawLog(obs, gs.underwater);
-      drawScore(gs.score, gs.underwater);
+      drawTurtle(gs.turtleY, gs.blocking);
+      for (const obs of gs.obstacles) {
+        if (obs.dead) continue;
+        if (obs.type === "log") drawLog(obs, gs.mode === "water");
+        else if (obs.type === "bird") drawBird(obs);
+        else if (obs.type === "fish") drawFish(obs);
+      }
+      drawScore(gs.score, gs.mode === "water");
+      drawBlockIndicator(gs);
 
       animFrameRef.current = requestAnimationFrame(loop);
     };
@@ -390,10 +683,14 @@ export default function TurtleJump() {
         e.preventDefault();
         jump();
       }
+      if (e.code === "KeyB") {
+        e.preventDefault();
+        block();
+      }
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [jump]);
+  }, [jump, block]);
 
   return (
     <div className="min-h-screen bg-background pt-24 pb-16 px-6">
@@ -434,8 +731,11 @@ export default function TurtleJump() {
         </div>
 
         <div className="text-center mt-6">
-          <p className="text-xs text-muted-foreground" data-testid="text-game-controls">
-            Space to jump (desktop) &middot; Tap to jump (mobile)
+          <p ref={controlsElRef} className="text-xs text-muted-foreground" data-testid="text-game-controls">
+            Space/Tap to jump &middot; B to shell-block birds
+          </p>
+          <p className="text-xs text-muted-foreground mt-1" data-testid="text-block-status">
+            {blockReady ? "Block ready" : "Block recharging..."}
           </p>
         </div>
       </div>

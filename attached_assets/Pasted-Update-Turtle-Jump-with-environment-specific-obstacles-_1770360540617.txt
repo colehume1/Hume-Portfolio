@@ -1,0 +1,95 @@
+Update Turtle Jump with environment-specific obstacles and a new defensive mechanic. Keep code minimal and don’t refactor unrelated UI.
+
+1) Make logs more “scattered” (LAND + WATER)
+
+Logs currently feel too uniform. Add variation:
+
+Randomize log width within a reasonable range
+
+Randomize spacing between logs (occasional clusters, occasional longer gaps)
+
+Optional: tiny y-variation as long as it still reads like “ground/sea-floor”
+
+Keep difficulty fair: always enough reaction time.
+
+2) Alternate between LAND and WATER every 200 score
+
+Game starts in LAND mode.
+
+Switch modes at score thresholds: 200, 400, 600, …
+
+Use: mode = (Math.floor(score / 200) % 2 === 0) ? "land" : "water"
+
+Add a short transition (300–600ms):
+
+land → water: splash or fade blue overlay
+
+water → land: fade back to land/sky
+
+Background visuals must clearly differ between land vs underwater.
+
+3) Add aerial birds (LAND mode) + shell-block mechanic (key “B”)
+LAND obstacles:
+
+Logs remain on ground.
+
+Add bird obstacles that fly in from the air (right-to-left) at an elevated y-position.
+
+Birds should spawn occasionally (less frequent than logs).
+
+Shell-block mechanic:
+
+Press B triggers a “shell block” state for a short duration (e.g., 400–600ms).
+
+While blocking:
+
+Turtle shows a defensive shell pose (sprite swap or simple animation ok)
+
+Collisions with birds are negated OR bird bounces/disappears (choose simplest).
+
+Add cooldown so it cannot be spammed (e.g., 1.0–1.5s).
+
+Blocking should NOT help with logs (logs still require jumping).
+
+4) Replace birds with fish in WATER mode (fish can be blocked with “B”)
+WATER obstacles:
+
+Keep logs as underwater logs OR adjust them visually to sit lower; either is fine but make it clear we’re underwater.
+
+Replace birds with fish obstacles:
+
+Fish swim in from the right at mid-height (not on the ground)
+
+Fish collisions cause game over unless blocked with B
+
+Jump still works (can be “swim burst”); optional: slightly floatier physics.
+
+5) Controls + hint text should update by mode
+
+Under the canvas show:
+
+LAND: “Space/Tap to jump • B to shell-block birds”
+
+WATER: “Space/Tap to swim-jump • B to shell-block fish”
+
+Optional: small cooldown indicator (“Block ready” / tiny bar).
+
+Output requirements (important)
+
+List files changed
+
+Tell me:
+
+bird spawn rate
+
+fish spawn rate
+
+block duration
+
+block cooldown
+
+log width range + spacing range
+
+Confirm mode switching works at every 200 score and repeats correctly
+
+Confirm B-block works reliably in both modes and does not allow passing through logs
