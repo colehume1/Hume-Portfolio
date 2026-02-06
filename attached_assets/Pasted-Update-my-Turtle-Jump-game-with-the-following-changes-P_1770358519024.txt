@@ -1,0 +1,116 @@
+Update my Turtle Jump game with the following changes. Please do not refactor unrelated parts of the site.
+
+A) Gameplay + visuals updates
+1) Fix jump physics so the turtle can clear obstacles
+
+Right now the turtle can never clear the log.
+
+Increase jump height and also make the jump carry farther.
+
+Tune:
+
+jumpVelocity (stronger jump)
+
+gravity (slightly lower if needed)
+
+obstacle speed / spacing (slower + more spaced is fine)
+
+Goal: a properly timed jump clears the log reliably. A late jump fails.
+
+2) Make the obstacle look like a log (not a rock)
+
+Replace rock obstacle art with a simple log:
+
+brown rounded rectangle/cylinder
+
+subtle end rings / wood detail so it reads as a log
+
+Keep it minimalist (no heavy assets).
+
+3) Add a “water level” at score 100
+
+When score reaches 100, trigger a short transition (fade/splash).
+
+Change background to water-blue.
+
+Continue gameplay in underwater mode:
+
+Obstacles become underwater logs
+
+Keep same collision rules
+
+Optionally make physics slightly “floatier” (lower gravity) but keep it playable and simple.
+
+4) Ninja turtle icon + playable character
+
+The clickable entry to the game (button/link) should show an icon of a turtle with a headband (ninja turtle vibe).
+
+The playable character sprite should be the headband turtle, not the happy turtle.
+
+If we don’t have a headband turtle asset yet, create a simple one in the existing style or draw it using canvas shapes.
+
+5) UX requirements
+
+Desktop: Space to jump
+
+Mobile: Tap to jump
+
+Restart screen copy should be funny but short
+
+Keep implementation small and readable
+
+B) Restart screen rotating quotes
+
+On the game over / restart screen, show one randomly selected quote from the quote bank below. The quote should refresh each death/restart (random selection is fine; optional: avoid repeating the same quote twice in a row).
+
+Display format:
+
+Quote text in italics
+
+Author on next line in lighter style (e.g. “— Seneca”)
+
+Responsive: wrap lines, max width, readable on mobile
+
+Use this quote list exactly (fix typos if needed, do not change meaning):
+
+“Forgive, O Lord, my little jokes on Thee, and I’ll forgive Thy great big joke on me.” — Robert Frost
+
+“We are more often frightened than hurt; and we suffer more in imagination than in reality.” — Seneca
+
+“The happiness of your life depends upon the quality of your thoughts.” — Marcus Aurelius
+
+“Of all the means to insure happiness throughout the whole life, by far the most important is the acquisition of friends.” — Epicurus
+
+“Not what we have but what we enjoy, constitutes our abundance.” — Epicurus
+
+“Empty is the argument of the philosopher which does not relieve any human suffering.” — Epicurus
+
+“The truth springs from argument amongst friends.” — David Hume
+
+“Educating the mind without educating the heart is no education at all.” — Aristotle
+
+“Actions are right in proportion as they tend to promote happiness, wrong as they tend to produce the reverse of happiness.” — John Stuart Mill
+
+“And the tree was happy.” — Shel Silverstein
+
+“In every real man a child is hidden that wants to play.” — Nietzsche
+
+“Be more concerned with your character than with your reputation. Your character is what you really are while your reputation is merely what others think you are.” — John Wooden
+
+Implementation requirements:
+
+Store quotes in one array: { text, author }
+
+On game over, set currentQuote = randomQuote()
+
+Render currentQuote above the Restart button
+
+Output requirements (important)
+
+List the exact files changed
+
+Tell me the exact values you set for gravity, jumpVelocity, obstacle speed, and obstacle spacing
+
+Confirm the turtle can clear the log reliably with correct timing
+
+Show me the quote array in code and where it’s used on the restart screen
