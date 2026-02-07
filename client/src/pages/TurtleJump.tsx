@@ -7,16 +7,20 @@ const CANVAS_HEIGHT = 280;
 const GROUND_Y = CANVAS_HEIGHT - 40;
 const TURTLE_SIZE = 36;
 
-const LOG_WIDTH_MIN = 28;
-const LOG_WIDTH_MAX = 55;
-const LOG_HEIGHT_BASE = 24;
-const LOG_HEIGHT_VAR = 10;
+const LOG_WIDTH_MIN = 24;
+const LOG_WIDTH_MAX = 44;
+const LOG_HEIGHT_BASE = 22;
+const LOG_HEIGHT_VAR = 8;
 
 const GRAVITY = 0.35;
 const JUMP_VELOCITY = -9.5;
 const GAME_SPEED = 1.6;
-const OBSTACLE_MIN_GAP = 220;
-const OBSTACLE_MAX_GAP = 480;
+const OBSTACLE_MIN_GAP = 240;
+const OBSTACLE_MAX_GAP = 460;
+const BLOCK_SCORE_BONUS = 100;
+const BLOCK_POPUP_DURATION = 400;
+const SPEED_STEP_INTERVAL = 1000;
+const SPEED_STEP_MULTIPLIER = 0.1;
 const WATER_GRAVITY = 0.25;
 const SCORE_PER_SECOND = 5;
 const MODE_INTERVAL = 200;
@@ -48,6 +52,13 @@ interface Obstacle {
   dead: boolean;
 }
 
+interface ScorePopup {
+  x: number;
+  y: number;
+  timer: number;
+  text: string;
+}
+
 interface GameState {
   turtleY: number;
   velocityY: number;
@@ -63,6 +74,7 @@ interface GameState {
   blocking: boolean;
   blockTimer: number;
   blockCooldown: number;
+  scorePopups: ScorePopup[];
 }
 
 const QUOTES = [
@@ -108,6 +120,7 @@ function createInitialState(): GameState {
     blocking: false,
     blockTimer: 0,
     blockCooldown: 0,
+    scorePopups: [],
   };
 }
 
@@ -618,6 +631,14 @@ export default function TurtleJump() {
         if (turtleRight > obsLeft && turtleLeft < obsRight && turtleBottom > obsTop && turtleTop < obsBottom) {
           if ((obs.type === "bird" || obs.type === "fish") && gs.blocking) {
             obs.dead = true;
+            gs.scoreAccum += BLOCK_SCORE_BONUS;
+            gs.score = Math.floor(gs.scoreAccum);
+            gs.scorePopups.push({
+              x: 60 + TURTLE_SIZE + 4,
+              y: gs.turtleY - 4,
+              timer: BLOCK_POPUP_DURATION,
+              text: `+${BLOCK_SCORE_BONUS}`,
+            });
             continue;
           }
           gs.phase = "over";
@@ -655,7 +676,16 @@ export default function TurtleJump() {
 
       gs.scoreAccum += SCORE_PER_SECOND * (dt * 16.667 / 1000);
       gs.score = Math.floor(gs.scoreAccum);
-      gs.speed = GAME_SPEED + gs.score * 0.0008;
+      const speedMultiplier = 1 + SPEED_STEP_MULTIPLIER * Math.floor(gs.score / SPEED_STEP_INTERVAL);
+      gs.speed = GAME_SPEED * speedMultiplier;
+
+      for (let pi = gs.scorePopups.length - 1; pi >= 0; pi--) {
+        gs.scorePopups[pi].timer -= rawDt;
+        gs.scorePopups[pi].y -= 0.4 * dt;
+        if (gs.scorePopups[pi].timer <= 0) {
+          gs.scorePopups.splice(pi, 1);
+        }
+      }
 
       drawTurtle(gs.turtleY, gs.blocking);
       for (const obs of gs.obstacles) {
@@ -666,6 +696,15 @@ export default function TurtleJump() {
       }
       drawScore(gs.score, gs.mode === "water");
       drawBlockIndicator(gs);
+
+      for (const popup of gs.scorePopups) {
+        const alpha = Math.min(1, popup.timer / (BLOCK_POPUP_DURATION * 0.3));
+        ctx.globalAlpha = alpha;
+        ctx.font = "bold 14px monospace";
+        ctx.fillStyle = "#2d8a4e";
+        ctx.fillText(popup.text, popup.x, popup.y);
+        ctx.globalAlpha = 1;
+      }
 
       animFrameRef.current = requestAnimationFrame(loop);
     };

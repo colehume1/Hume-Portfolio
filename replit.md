@@ -82,13 +82,14 @@ Preferred communication style: Simple, everyday language.
 ### Turtle Jump Game (`client/src/pages/TurtleJump.tsx`)
 - **Route**: `/turtle-jump`
 - **Canvas**: 640x280, ground at y=240
-- **Scoring**: SCORE_PER_SECOND=5, float accumulator, Math.floor display
+- **Scoring**: SCORE_PER_SECOND=5, float accumulator, Math.floor display. +100 bonus for successful shell-blocks (bird/fish only, once per obstacle). "+100" popup near turtle for 400ms with fade-out.
 - **Physics**: GRAVITY=0.35, JUMP_VELOCITY=-9.5, WATER_GRAVITY=0.25, GAME_SPEED=1.6
+- **Speed scaling**: `speedMultiplier = 1 + 0.1 * Math.floor(score / 1000)`. Applied to base GAME_SPEED. At 1000: 1.1x, 2000: 1.2x, etc.
 - **Mode cycling**: Alternates LAND/WATER every MODE_INTERVAL=200 score. Formula: `(Math.floor(score/200) % 2 === 0) ? "land" : "water"`. Bidirectional waterTransition lerp at 0.012/frame.
-- **Log obstacles**: Width 28-55px (LOG_WIDTH_MIN/MAX), height 24-34px, spacing 220-480px
+- **Log obstacles**: Width 24-44px (LOG_WIDTH_MIN/MAX), height 22-30px, spacing 240-460px. Capped for guaranteed jumpability.
 - **Bird obstacles** (LAND only): 30x22px, y range 70-155, spawn chance 28%, move 15% faster
 - **Fish obstacles** (WATER only): 32x20px, y range 75-160, spawn chance 30%, move 15% faster
-- **Shell-block (B key)**: BLOCK_DURATION=500ms, BLOCK_COOLDOWN=1300ms. Negates bird/fish collisions, NOT log collisions. Visual: green shell sprite + shield ring. Canvas indicator: "[B] Block" / progress bar / "SHELL!"
+- **Shell-block (B key)**: BLOCK_DURATION=500ms, BLOCK_COOLDOWN=1300ms. Negates bird/fish collisions, NOT log collisions. Awards +100 score. Visual: green shell sprite + shield ring. Canvas indicator: "[B] Block" / progress bar / "SHELL!"
 - **Controls hint**: Updates per mode. LAND: "Space/Tap to jump · B to shell-block birds". WATER: "Space/Tap to swim-jump · B to shell-block fish"
 - **Game-over quotes**: 12 philosophical quotes with no-repeat logic, contextual funny messages per obstacle type
 - **Turtle cursor**: Custom animated cursor (desktop-only) with idle/moving states in TurtleCursor.tsx
