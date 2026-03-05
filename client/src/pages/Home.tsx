@@ -27,13 +27,13 @@ export default function Home() {
             }}
           >
             <motion.span variants={fadeIn} className="inline-block text-accent font-medium tracking-wider text-sm uppercase mb-4">
-              Based in San Diego
+              Based in Los Angeles | From San Diego
             </motion.span>
             <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-display font-bold text-foreground leading-[1.1] mb-6">
               Cole Hume
             </motion.h1>
             <motion.p variants={fadeIn} className="text-lg md:text-xl text-muted-foreground font-light mb-6 max-w-lg">
-              Love big ideas, small inputs, & good people
+              Love big ideas, small inputs, & good intentions
             </motion.p>
             
             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
