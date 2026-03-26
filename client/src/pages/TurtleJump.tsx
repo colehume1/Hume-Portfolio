@@ -40,11 +40,11 @@ const FISH_SPAWN_CHANCE = 0.30;
 const BLOCK_DURATION = 500;
 const BLOCK_COOLDOWN = 1300;
 
-const SKY_QUOTE_SPEED = 0.75;
-const SKY_QUOTE_INTERVAL_MIN = 20000;
-const SKY_QUOTE_INTERVAL_MAX = 40000;
-const SKY_QUOTE_FIRST_DELAY_MIN = 8000;
-const SKY_QUOTE_FIRST_DELAY_MAX = 14000;
+const SKY_QUOTE_SPEED_FACTOR = 0.4;
+const SKY_QUOTE_INTERVAL_MIN = 30000;
+const SKY_QUOTE_INTERVAL_MAX = 50000;
+const SKY_QUOTE_FIRST_DELAY_MIN = 12000;
+const SKY_QUOTE_FIRST_DELAY_MAX = 20000;
 
 type ObstacleType = "log" | "bird" | "fish";
 type GameMode = "land" | "water";
@@ -70,6 +70,9 @@ interface SkyQuote {
   y: number;
   text: string;
   author: string;
+  speed: number;
+  textWidth: number;
+  alpha: number;
 }
 
 interface GameState {
@@ -706,37 +709,42 @@ export default function TurtleJump() {
 
       gs.nextSkyQuoteIn -= rawDt;
       if (gs.nextSkyQuoteIn <= 0) {
-        const sq = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+        const qEntry = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+        const fullText = `${qEntry.text}  \u2014 ${qEntry.author}`;
+        ctx.font = "italic 9px serif";
+        const tw = ctx.measureText(fullText).width;
         gs.skyQuotes.push({
           x: CANVAS_WIDTH + 8,
           y: 18 + Math.random() * 30,
-          text: sq.text,
-          author: sq.author,
+          text: qEntry.text,
+          author: qEntry.author,
+          speed: gs.speed * SKY_QUOTE_SPEED_FACTOR,
+          textWidth: tw,
+          alpha: 0,
         });
         gs.nextSkyQuoteIn = SKY_QUOTE_INTERVAL_MIN + Math.random() * (SKY_QUOTE_INTERVAL_MAX - SKY_QUOTE_INTERVAL_MIN);
       }
       for (let si = gs.skyQuotes.length - 1; si >= 0; si--) {
-        gs.skyQuotes[si].x -= SKY_QUOTE_SPEED * dt;
-        if (gs.skyQuotes[si].x < -700) {
+        const sq = gs.skyQuotes[si];
+        sq.x -= sq.speed * dt;
+        if (sq.x + sq.textWidth < 0) {
           gs.skyQuotes.splice(si, 1);
         }
       }
 
       for (const sq of gs.skyQuotes) {
-        const fullText = `${sq.text}  \u2014 ${sq.author}`;
-        ctx.font = "italic 9px serif";
-        const tw = ctx.measureText(fullText).width;
-        if (sq.x + tw < 0) continue;
-        let alpha = Math.min(1, (CANVAS_WIDTH - sq.x) / 100);
-        alpha = Math.min(alpha, Math.min(1, (sq.x + tw) / 100));
+        if (sq.x + sq.textWidth < 0) continue;
+        let alpha = Math.min(1, (CANVAS_WIDTH - sq.x) / 80);
+        alpha = Math.min(alpha, Math.min(1, (sq.x + sq.textWidth) / 80));
         alpha = Math.max(0, alpha);
+        sq.alpha = alpha;
         const r = Math.round(100 + (55 - 100) * waterT);
         const g = Math.round(72 + (92 - 72) * waterT);
         const b = Math.round(42 + (125 - 42) * waterT);
         ctx.save();
         ctx.font = "italic 9px serif";
         ctx.fillStyle = `rgba(${r},${g},${b},${alpha * 0.45})`;
-        ctx.fillText(fullText, sq.x, sq.y);
+        ctx.fillText(`${sq.text}  \u2014 ${sq.author}`, sq.x, sq.y);
         ctx.restore();
       }
 
