@@ -32,9 +32,7 @@ export default function Home() {
             <motion.h1 variants={fadeIn} className="text-5xl md:text-7xl font-display font-bold text-foreground leading-[1.1] mb-6">
               Cole Hume
             </motion.h1>
-            <motion.p variants={fadeIn} className="text-lg md:text-xl text-muted-foreground font-light mb-6 max-w-lg">
-              Love big ideas, small inputs, & good intentions
-            </motion.p>
+            <motion.p variants={fadeIn} className="text-lg md:text-xl text-muted-foreground font-light mb-6 max-w-lg">Love big ideas, small inputs, & messy curiosity</motion.p>
             
             <motion.div variants={fadeIn} className="flex flex-col sm:flex-row gap-4">
               <a href="#contact" className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity">
@@ -63,7 +61,6 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-
       {/* Single Page Sections */}
       <div id="content">
         <Content maxPosts={4} />
@@ -86,7 +83,6 @@ export default function Home() {
           </div>
         </Link>
       </motion.section>
-
       <div id="contact">
         <Contact />
       </div>
