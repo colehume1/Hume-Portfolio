@@ -40,6 +40,12 @@ const FISH_SPAWN_CHANCE = 0.30;
 const BLOCK_DURATION = 500;
 const BLOCK_COOLDOWN = 1300;
 
+const SKY_QUOTE_SPEED = 0.75;
+const SKY_QUOTE_INTERVAL_MIN = 20000;
+const SKY_QUOTE_INTERVAL_MAX = 40000;
+const SKY_QUOTE_FIRST_DELAY_MIN = 8000;
+const SKY_QUOTE_FIRST_DELAY_MAX = 14000;
+
 type ObstacleType = "log" | "bird" | "fish";
 type GameMode = "land" | "water";
 
@@ -59,6 +65,13 @@ interface ScorePopup {
   text: string;
 }
 
+interface SkyQuote {
+  x: number;
+  y: number;
+  text: string;
+  author: string;
+}
+
 interface GameState {
   turtleY: number;
   velocityY: number;
@@ -75,6 +88,8 @@ interface GameState {
   blockTimer: number;
   blockCooldown: number;
   scorePopups: ScorePopup[];
+  skyQuotes: SkyQuote[];
+  nextSkyQuoteIn: number;
 }
 
 const QUOTES = [
@@ -121,6 +136,8 @@ function createInitialState(): GameState {
     blockTimer: 0,
     blockCooldown: 0,
     scorePopups: [],
+    skyQuotes: [],
+    nextSkyQuoteIn: SKY_QUOTE_FIRST_DELAY_MIN + Math.random() * (SKY_QUOTE_FIRST_DELAY_MAX - SKY_QUOTE_FIRST_DELAY_MIN),
   };
 }
 
@@ -685,6 +702,42 @@ export default function TurtleJump() {
         if (gs.scorePopups[pi].timer <= 0) {
           gs.scorePopups.splice(pi, 1);
         }
+      }
+
+      gs.nextSkyQuoteIn -= rawDt;
+      if (gs.nextSkyQuoteIn <= 0) {
+        const sq = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+        gs.skyQuotes.push({
+          x: CANVAS_WIDTH + 8,
+          y: 18 + Math.random() * 30,
+          text: sq.text,
+          author: sq.author,
+        });
+        gs.nextSkyQuoteIn = SKY_QUOTE_INTERVAL_MIN + Math.random() * (SKY_QUOTE_INTERVAL_MAX - SKY_QUOTE_INTERVAL_MIN);
+      }
+      for (let si = gs.skyQuotes.length - 1; si >= 0; si--) {
+        gs.skyQuotes[si].x -= SKY_QUOTE_SPEED * dt;
+        if (gs.skyQuotes[si].x < -700) {
+          gs.skyQuotes.splice(si, 1);
+        }
+      }
+
+      for (const sq of gs.skyQuotes) {
+        const fullText = `${sq.text}  \u2014 ${sq.author}`;
+        ctx.font = "italic 9px serif";
+        const tw = ctx.measureText(fullText).width;
+        if (sq.x + tw < 0) continue;
+        let alpha = Math.min(1, (CANVAS_WIDTH - sq.x) / 100);
+        alpha = Math.min(alpha, Math.min(1, (sq.x + tw) / 100));
+        alpha = Math.max(0, alpha);
+        const r = Math.round(100 + (55 - 100) * waterT);
+        const g = Math.round(72 + (92 - 72) * waterT);
+        const b = Math.round(42 + (125 - 42) * waterT);
+        ctx.save();
+        ctx.font = "italic 9px serif";
+        ctx.fillStyle = `rgba(${r},${g},${b},${alpha * 0.45})`;
+        ctx.fillText(fullText, sq.x, sq.y);
+        ctx.restore();
       }
 
       drawTurtle(gs.turtleY, gs.blocking);
