@@ -43,8 +43,8 @@ const BLOCK_COOLDOWN = 1300;
 const SKY_QUOTE_SPEED_FACTOR = 0.4;
 const SKY_QUOTE_INTERVAL_MIN = 30000;
 const SKY_QUOTE_INTERVAL_MAX = 50000;
-const SKY_QUOTE_FIRST_DELAY_MIN = 12000;
-const SKY_QUOTE_FIRST_DELAY_MAX = 20000;
+const SKY_QUOTE_FIRST_DELAY_MIN = 30000;
+const SKY_QUOTE_FIRST_DELAY_MAX = 50000;
 
 type ObstacleType = "log" | "bird" | "fish";
 type GameMode = "land" | "water";
