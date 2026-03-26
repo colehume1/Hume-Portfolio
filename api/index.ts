@@ -1,11 +1,18 @@
 import express, { type Request, Response } from "express";
+import { type IncomingMessage, type ServerResponse } from "http";
 import { registerRoutes } from "../server/routes";
+
+declare module "http" {
+  interface IncomingMessage {
+    rawBody: unknown;
+  }
+}
 
 const app = express();
 
 app.use(
   express.json({
-    verify: (req: any, _res: any, buf: any) => {
+    verify: (req: IncomingMessage, _res: ServerResponse, buf: Buffer) => {
       req.rawBody = buf;
     },
   })
