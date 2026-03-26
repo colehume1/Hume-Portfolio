@@ -8,6 +8,10 @@ html {
   scroll-behavior: smooth;
 }
 
+*, *::before, *::after {
+  cursor: none !important;
+}
+
 :root {
   /* Minimalist, Professional Palette */
   /* Warm/Organic undertones for "loving impact" */

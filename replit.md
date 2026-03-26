@@ -59,7 +59,9 @@ Preferred communication style: Simple, everyday language.
 ## External Dependencies
 
 ### Database
-- **PostgreSQL**: Primary database, connection via `DATABASE_URL` environment variable
+- **PostgreSQL**: External Neon (neon.tech) database for cross-platform accessibility
+- **Connection**: Uses `NEON_DATABASE_URL` env var (preferred) with fallback to `DATABASE_URL`
+- **Note for external deployments (e.g., Vercel)**: Set `DATABASE_URL` to the Neon connection string directly
 - **connect-pg-simple**: PostgreSQL session store (available but not currently used)
 
 ### Third-Party Services
